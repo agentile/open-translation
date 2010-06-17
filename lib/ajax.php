@@ -2,6 +2,7 @@
 /**
  * AJAX Dispatcher
  */
+require_once 'database.php';
 class OT_Ajax {
 
     // Ajax response properties
@@ -13,6 +14,9 @@ class OT_Ajax {
     // POST and GET data
     protected $_post = array();
     protected $_get  = array();
+
+    // Database
+    protected $_db = null;
 
     /**
      * _construct
@@ -26,6 +30,8 @@ class OT_Ajax {
     {
         $this->_post = $_POST;
         $this->_get  = $_GET;
+
+        $this->_db = new OT_DB();
 
         // look for ajax_action to properly dispatch
         if (isset($this->_post['ajax_action'])) {
@@ -74,6 +80,23 @@ class OT_Ajax {
         );
 
         echo json_encode($ret);
+    }
+
+    public function ajax_fetch_page_translations()
+    {
+        $page = $this->_get['page'];
+        $code = $this->_get['native_code'];
+        $text = $this->_get['selected'];
+        $this->data = $this->_db->fetchPageTranslation($page, $code, $text);
+        $this->success = true;
+    }
+
+    public function ajax_fetch_available_locales()
+    {
+        $config = include 'config.php';
+        $locales = $config['translations']['available_locales'];
+        $this->data = $locales;
+        $this->success = true;
     }
 }
 

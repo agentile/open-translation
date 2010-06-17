@@ -4,9 +4,9 @@ $config = array();
 $config['database'] = array(
     'type' => 'mysql',
     'host' => 'localhost',
-    'user' => 'username',
-    'pass' => 'password',
-    'name' => 'db_name',
+    'user' => 'testing',
+    'pass' => 'testing',
+    'name' => 'test',
 );
 
 $config['translations'] = array(

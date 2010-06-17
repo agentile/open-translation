@@ -8,6 +8,11 @@
   z-index: 999;
 }
 
+#ot_box p {
+  padding: 0px;
+  display: inline;
+}
+
 .ot_translatable {
   cursor:help;
 }
