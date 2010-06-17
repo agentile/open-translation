@@ -7,3 +7,7 @@
   font-size: 12px;
   z-index: 999;
 }
+
+.ot_translatable {
+  cursor:help;
+}

@@ -9,9 +9,14 @@
 <script src="../js/open-translation.js"></script>
 </head>
 <body>
-<p>Some example of text.</p>
+<p>Some example of text, select me.</p><br/>
+<p class="ot_translatable">Example using 'ot_translatable' class.</p>
 <script type="text/javascript">
-ot.init();
+ot.init({
+    native_locale: 'en_US',
+    csrf_token: '',
+    translate_type: 'all' // class, selected, all
+});
 </script>
 </body>
 </html>

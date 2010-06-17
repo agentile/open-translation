@@ -1,13 +1,28 @@
-var csrf_token = '';
+var options = {};
 var selected = '';
-var locale_code = 'en_US';
 var ot =
 {
-    init : function(csrf, native_code) {
-        csrf_token = csrf;
-        if (native_code) {
-            locale_code = native_code;
+    init : function($options) {
+        // default options
+        options = {
+            native_locale: 'en_US',
+            csrf_token: '',
+            translate_type: 'all' // class, selected, all
+        };
+
+        // load options
+        if ($options.native_locale) {
+            options.native_locale = $options.native_locale;
         }
+
+        if ($options.csrf_token) {
+            options.csrf_token = $options.csrf_token;
+        }
+
+        if ($options.translate_type) {
+            options.translate_type = $options.translate_type;
+        }
+
         $(document).mouseup(function() {
             selected = getSelectedText();
             if (selected != '') {
@@ -17,6 +32,11 @@ var ot =
                     displayTranslateRequest();
                 }
             }
+        });
+
+        $('.ot_translatable').click(function(e) {
+            selected = $('.ot_translatable').text();
+            displayTranslateRequest();
         });
 
         $('#ot_confirm').live('click', function(e) {
@@ -50,9 +70,9 @@ var ot =
                 type: 'GET',
                 data: {
                     ajax_action: 'fetch_translation',
-                    locale_code: locale_code,
+                    native_code: options.native_code,
                     text: selected,
-                    csrf_token: csrf_token
+                    csrf_token: options.csrf_token
                 },
                 dataType: 'json',
                 success: function(result) {
