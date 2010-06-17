@@ -11,9 +11,29 @@ var ot =
         $(document).mouseup(function() {
             selected = getSelectedText();
             if (selected != '') {
-                loadTranslateDialog(locale_code, selected);
+                if ($('#ot_box').length) {
+                    $('#ot_box').show();
+                } else {
+                    displayTranslateRequest();
+                }
             }
         });
+
+        $('#ot_confirm').live('click', function(e) {
+            e.preventDefault();
+            $(this).parent('div').hide();
+            loadTranslateDialog(locale_code, selected);
+        });
+
+        $('#ot_cancel').live('click', function(e) {
+            e.preventDefault();
+            $(this).parent('div').hide();
+        });
+
+        function displayTranslateRequest()
+        {
+            $('body').prepend('<div id="ot_box"><p>Translate selected text</p><a href="#" id="ot_confirm">Yes</a>&nbsp;|&nbsp;<a href="#" id="ot_cancel">No</a></div>');       
+        }
 
         function getSelectedText() {
             if (window.getSelection) {
