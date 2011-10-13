@@ -941,7 +941,7 @@ class OT_DB
         return $this->fetchAll($sql);
     }
     
-    public function fetchPageTranslation($url, $native_code, $native_text)
+    public function fetchPageTranslations($url, $native_code, $native_text)
     {
         $sql = "SELECT * 
                 FROM ot_translations
@@ -957,6 +957,20 @@ class OT_DB
         return $this->fetchAll($sql, $data);
     }
     
+    public function fetchTranslationsByKey($native_code, $native_text)
+    {
+        $sql = "SELECT * 
+                FROM ot_translations
+                WHERE native_locale_code = :ncode
+                    AND native_text = :ntext";
+        
+        $data = array(
+            'ncode' => $native_code,
+            'ntext' => $native_text,
+        );
+        return $this->fetchAll($sql, $data);
+    }
+    
     public function insertEntry($page, $native_code, $native_text, $translated_code, $translated_text, $ip)
     {
         $data = array(
@@ -965,7 +979,7 @@ class OT_DB
             'native_text' => $native_text,
             'translated_locale_code' => $translated_code,
             'translated_text' => $translated_text,
-            'ip' => ip2long($ip),
+            'ip' => sprintf("%u", ip2long($ip)),
         );
         return $this->insert('ot_translations', $data);
     }
