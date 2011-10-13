@@ -31,6 +31,33 @@ var ot = {
       
     },
     
+    fetchAvailableLocales : function() {
+      
+      var self = this;
+      
+      $.ajax({
+        url: (self.C.ajax_url + '?ajax_action=fetch_available_locales'),
+        type: 'GET',
+        success: function(data) {
+          if (data.success) {
+            $('#ot_header select').html(getHTMLForReturnedLocales(data));
+          }
+          else {
+            alert('Could not retrieve locales listing.');
+          }
+        }
+      });
+      
+      function getHTMLForReturnedLocales(data) {
+        var outputHTML;
+        for (var i in data.data) {
+          outputHTML += '<option value="' + i + '">' + data.data[i] + '</option>';
+        }
+        return outputHTML;
+      }
+      
+    },
+    
     init : function($options) {
       
       var self = this;

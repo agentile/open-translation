@@ -993,7 +993,7 @@ class OT_DB
         return $this->fetchOne($sql, $data);
     }
     
-    public function insertEntry($page, $native_code, $native_text, $translated_code, $translated_text, $ip)
+    public function insertEntry($url, $native_code, $native_text, $translated_code, $translated_text, $ip)
     {
         // does this entry already exist?
         $entry = $this->fetchTranslationByMeta($native_code, $native_text, $translated_code, $translated_text);
@@ -1003,7 +1003,7 @@ class OT_DB
         }
         
         $data = array(
-            'url' => $page,
+            'url' => $url,
             'native_locale_code' => $native_code,
             'native_text' => $native_text,
             'translated_locale_code' => $translated_code,

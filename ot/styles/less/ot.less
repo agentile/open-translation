@@ -13,15 +13,21 @@
           background-clip: padding-box;
 }
 
+@translatableBackground: #ccfa02;
+
 // Translate mode enabled when body contains this class.
 // Simple removing the class from the body tag (through javascript)
 // will remove edit mode styles from the page
 body.translatable {
 
-  // Any item with an attribute "data-translatable-id"
+	// Any item with an attribute "data-translatable-id"
   // is a translatable item.
 	[data-translatable-id] {
 		background: #ccfa02;
+		&:hover {
+		  cursor: pointer;
+		  background: spin(@translatableBackground, 22);
+		}
 	}
 
   #ot_box {
@@ -54,6 +60,34 @@ body.translatable {
     }
     
   }
+  
+  #ot_translate {
+    display: none;
+	  position: fixed;
+	  left: 0;
+	  top: 0;
+	  background: #fff;
+	  opacity: 0.8;
+	  width: 100%;
+	  height: 100%;
+	  z-index: 800;
+	  text-align: center;
+	  
+	  > .container {
+	    width: 400px;
+	    margin: 0 auto;
+	  }
+	  
+	  ul.responses {
+	    > li.positive {
+	      background: #b1f89d;
+	    }
+	    > li.negative {
+	      background: #f6aa9d;
+	    }
+	  }
+	  
+	}
   
 }
 
@@ -113,7 +147,7 @@ body.translatable {
 
 .ot-translate-this {
   display: inline-block;
-  font-size: 50px;
+  font-size: 20px;
   color: #000;
   position: relative;
 }
