@@ -109,6 +109,21 @@ class OT_Ajax {
         $this->success = true;
     }
     
+    public function ajax_entry_exists()
+    {
+        $native_code = $this->_post['native_code'];
+        $native_text = $this->_post['native_text'];
+        $translated_code = $this->_post['translated_code'];
+        $translated_text = $this->_post['translated_text'];
+        $entry = $this->db->fetchTranslationByMeta($native_code, $native_text, $translated_code, $translated_text);
+        if ($entry) {
+            $this->data['exists'] = true;
+        } else {
+            $this->data['exists'] = false;
+        }
+        $this->success;
+    }
+    
     public function ajax_create_translation_entry()
     {
         $page = $this->_post['page'];
