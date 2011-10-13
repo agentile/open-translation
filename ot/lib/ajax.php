@@ -89,7 +89,15 @@ class OT_Ajax {
         $page = $this->_get['page'];
         $code = $this->_get['native_code'];
         $text = $this->_get['selected'];
-        $this->data = $this->db->fetchPageTranslation($page, $code, $text);
+        $this->data = $this->db->fetchPageTranslations($page, $code, $text);
+        $this->success = true;
+    }
+    
+    public function ajax_fetch_translations_by_key()
+    {
+        $code = $this->_get['native_code'];
+        $text = $this->_get['key'];
+        $this->data = $this->db->fetchPageTranslations($code, $text);
         $this->success = true;
     }
 
