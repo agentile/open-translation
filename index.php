@@ -28,6 +28,12 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
 	<script src="/ot/js/open-translation.js<?php echo '?' . filemtime(dirname(__FILE__) . '/ot/js/open-translation.js');?>"></script>
 </head>
 <body>
+  <div class="ot-mode-indicator">
+    <h1>My language:</h1>
+    <span class="ot-mode-language">French</span>
+  </div>
+  
+  
 	<header>
 		<h1 data-translatable-id="WELCOME"><?php echo $locale->fetch('WELCOME');?></h1>
 		<p data-translatable-id="project_description">This is the description of the open-translation project. <a href="/#translate">Turn On Translation</a></p>
