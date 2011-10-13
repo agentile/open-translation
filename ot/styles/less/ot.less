@@ -13,17 +13,21 @@
           background-clip: padding-box;
 }
 
-
+@translatableBackground: #ccfa02;
 
 // Translate mode enabled when body contains this class.
 // Simple removing the class from the body tag (through javascript)
 // will remove edit mode styles from the page
 body.translatable {
 
-  // Any item with an attribute "data-translatable-id"
+	// Any item with an attribute "data-translatable-id"
   // is a translatable item.
 	[data-translatable-id] {
 		background: #ccfa02;
+		&:hover {
+		  cursor: pointer;
+		  background: spin(@translatableBackground, 22);
+		}
 	}
 
   #ot_box {
@@ -56,6 +60,34 @@ body.translatable {
     }
     
   }
+  
+  #ot_translate {
+    display: none;
+	  position: fixed;
+	  left: 0;
+	  top: 0;
+	  background: #fff;
+	  opacity: 0.8;
+	  width: 100%;
+	  height: 100%;
+	  z-index: 800;
+	  text-align: center;
+	  
+	  > .container {
+	    width: 400px;
+	    margin: 0 auto;
+	  }
+	  
+	  ul.responses {
+	    > li.positive {
+	      background: #b1f89d;
+	    }
+	    > li.negative {
+	      background: #f6aa9d;
+	    }
+	  }
+	  
+	}
   
 }
 
@@ -90,13 +122,12 @@ body.translatable {
   background: -webkit-linear-gradient(top, rgba(250,250,250,1) 0%,rgba(255,255,255,1) 100%);
   background: -o-linear-gradient(top, rgba(250,250,250,1) 0%,rgba(255,255,255,1) 100%);
   background: -ms-linear-gradient(top, rgba(250,250,250,1) 0%,rgba(255,255,255,1) 100%);
-  filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#ffffff',GradientType=0 )";
   background: linear-gradient(top, rgba(250,250,250,1) 0%,rgba(255,255,255,1) 100%);
 }
 
 .ot-translate-this {
   display: inline-block;
-  font-size: 50px;
+  font-size: 20px;
   color: #000;
   position: relative;
 }
@@ -175,12 +206,12 @@ body.translatable {
   
   .ot-list-green {
     background: rgb(174,245,155);
+
     background: -moz-linear-gradient(top, rgba(174,245,155,1) 0%, rgba(185,255,163,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(174,245,155,1)), color-stop(100%,rgba(185,255,163,1)));
     background: -webkit-linear-gradient(top, rgba(174,245,155,1) 0%,rgba(185,255,163,1) 100%);
     background: -o-linear-gradient(top, rgba(174,245,155,1) 0%,rgba(185,255,163,1) 100%);
     background: -ms-linear-gradient(top, rgba(174,245,155,1) 0%,rgba(185,255,163,1) 100%);
-    filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#aef59b', endColorstr='#b9ffa3',GradientType=0 )";
     background: linear-gradient(top, rgba(174,245,155,1) 0%,rgba(185,255,163,1) 100%);
     
     &:hover {
@@ -190,16 +221,15 @@ body.translatable {
       background: -webkit-linear-gradient(top, rgba(140,199,124,1) 0%,rgba(195,254,177,1) 100%);
       background: -o-linear-gradient(top, rgba(140,199,124,1) 0%,rgba(195,254,177,1) 100%);
       background: -ms-linear-gradient(top, rgba(140,199,124,1) 0%,rgba(195,254,177,1) 100%);
-      filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#aef59b', endColorstr='#b9ffa3',GradientType=0 )";
       background: linear-gradient(top, rgba(140,199,124,1) 0%,rgba(195,254,177,1) 100%);
     }
     
     &:active {
       top: 1px;
       
-      -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(0, 0, 0, 0.15); 
-         -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(0, 0, 0, 0.15); 
-              box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(0, 0, 0, 0.15);
+      -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20); 
+         -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20); 
+              box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20);
     }
   }
   
@@ -210,7 +240,6 @@ body.translatable {
     background: -webkit-linear-gradient(top, rgba(244,169,155,1) 0%,rgba(255,178,163,1) 100%);
     background: -o-linear-gradient(top, rgba(244,169,155,1) 0%,rgba(255,178,163,1) 100%);
     background: -ms-linear-gradient(top, rgba(244,169,155,1) 0%,rgba(255,178,163,1) 100%);
-    filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4a99b', endColorstr='#ffb2a3',GradientType=0 )";
     background: linear-gradient(top, rgba(244,169,155,1) 0%,rgba(255,178,163,1) 100%);
     
     &:hover {
@@ -220,17 +249,36 @@ body.translatable {
       background: -webkit-linear-gradient(top, rgba(206,133,123,1) 0%,rgba(254,177,162,1) 100%);
       background: -o-linear-gradient(top, rgba(206,133,123,1) 0%,rgba(254,177,162,1) 100%);
       background: -ms-linear-gradient(top, rgba(206,133,123,1) 0%,rgba(254,177,162,1) 100%);
-      filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4a99b', endColorstr='#ffb2a3',GradientType=0 )";
       background: linear-gradient(top, rgba(206,133,123,1) 0%,rgba(254,177,162,1) 100%); 
     }
     
     &:active {
       top: 1px;
       
-      -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(0, 0, 0, 0.15); 
-         -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(0, 0, 0, 0.15); 
-              box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(0, 0, 0, 0.15);
+      -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20); 
+         -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20); 
+              box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20);
     }
   }
 }
+
+.ot-translateable {
+  width: 200px;
+  height: 150px;
+  margin: 30px 0;
+  .box-round(2px);
+  
+  &.ot-need-translation {
+    -webkit-box-shadow: inset 0 0 0 1px #978080, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #ff0000;
+       -moz-box-shadow: inset 0 0 0 1px #978080, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #ff0000;
+            box-shadow: inset 0 0 0 1px #978080, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #ff0000;
+  }
+  
+  &.ot-has-translation {
+    -webkit-box-shadow: inset 0 0 0 1px #899685, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #77a86a;
+       -moz-box-shadow: inset 0 0 0 1px #899685, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #77a86a;
+            box-shadow: inset 0 0 0 1px #899685, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #77a86a;
+  }
+}
+
 
