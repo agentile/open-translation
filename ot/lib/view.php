@@ -72,6 +72,6 @@ class OT_View
             $locale_settings = OT::getConfigKey('native_locale');
             $this->setLocale($local_settings);
         }
-        return $this->_locale->locale($key, $replace);
+        return $this->_locale->fetch($key, $replace);
     }
 }

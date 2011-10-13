@@ -148,7 +148,7 @@ class OT_Locale
      * does not.
      * 
      */
-    public function locale($key, $replace = null)
+    public function fetch($key, $replace = null)
     {
         if (!isset($this->trans[$this->default['code']])) {
             $this->load($this->default['code']);

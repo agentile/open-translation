@@ -1,3 +1,20 @@
+<?php
+require 'ot/lib/locale.php';
+
+$accepted_locales = array(
+    'en' => 'en_US', 
+    'es' => 'es_MX'
+);
+
+if (isset($_GET['lang']) && in_array($_GET['lang'], array_keys($accepted_languages))) {
+    $locale_code = $accepted_languages[$_GET['lang']];
+} else {
+    $config = include 'ot/lib/config.php';
+    $locale_code = $config['native_locale']['code']; 
+}
+
+$locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__) . '/locales'));
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,7 +29,7 @@
 </head>
 <body>
 <header>
-<h1 data-translatable-id="header">Welcome to Open-Translation</h1>
+<h1 data-translatable-id="header"><?php echo $locale->fetch('WELCOME');?></h1>
 <p data-translatable-id="project_description">This is the description of the open-translation project</p>
 <p class="ot_translatable">Example using 'ot_translatable' class.</p>
 

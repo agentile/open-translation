@@ -1,5 +1,5 @@
 <?php
 return array(
-    'WELCOME' => 'Hello %s!',
+    'WELCOME' => 'Welcome to Open Translation',
     'GOODBYE' => 'Goodbye!',
 );
