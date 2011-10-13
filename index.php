@@ -29,10 +29,11 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
 	<script src="/ot/js/open-translation.js<?php echo '?' . filemtime(dirname(__FILE__) . '/ot/js/open-translation.js');?>"></script>
 </head>
 <body>
-  <div class="ot-mode-indicator">
+	
+  <!-- <div class="ot-mode-indicator">
     <h1>My language:</h1>
     <span class="ot-mode-language">French</span>
-  </div>
+  </div> -->
   
   
 	<header>
