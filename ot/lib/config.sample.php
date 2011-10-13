@@ -2,11 +2,11 @@
 $config = array();
 
 $config['database'] = array(
-    'type' => 'pgsl',
+    'type' => 'mysql',
     'host' => 'localhost',
-    'user' => 'otdev',
-    'pass' => 'P@!zxcvLoRzz2',
-    'name' => 'otdev',
+    'user' => 'testing',
+    'pass' => 'testing',
+    'name' => 'test',
 );
 
 $config['translations'] = array(
