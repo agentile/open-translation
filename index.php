@@ -13,6 +13,7 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], array_keys($accepted_languag
     $locale_code = $config['native_locale']['code']; 
 }
 
+$locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__) . '/locales'));
 $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__) . '/locales', 'fallback_code' => 'en_US'));
 ?>
 <!DOCTYPE html>
@@ -44,7 +45,7 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
 	<p data-translatable-id="example_text"><?php echo $locale->fetch('EXAMPLE_TEXT');?></p>
 
 
-  <input type="text" class="ot-add-translation" />
+  <!-- <input type="text" class="ot-add-translation" />
   <blockquote class="ot-translate-this"><?php echo $locale->fetch('TRANSLATE_THIS');?></blockquote>
   <a href="#" class="ot-submit ot-pill"><?php echo $locale->fetch('SUBMIT');?></a>
   
@@ -65,8 +66,8 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
     </li>
   </ul>
 
-  <div class="ot-translateable ot-need-translation"></div>
-  <div class="ot-translateable ot-has-translation"></div>
+   <div class="ot-translateable ot-need-translation"></div>
+   <div class="ot-translateable ot-has-translation"></div> -->
 
 
 
