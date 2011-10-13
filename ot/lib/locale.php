@@ -1,6 +1,5 @@
 <?php
 /**
- * 
  * OT Locale
  */
 class OT_Locale

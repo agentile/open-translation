@@ -4,11 +4,14 @@
  */
 class OT {
     
-    // ot path
+    // ot base path
     public static $system;
     public static $config = array();
     public static $_object_store = array();
     
+    /**
+     * Fetch object from object store.
+     */
     public static function getObject($class_name, $args = array())
     {
         if (!isset(self::$_object_store[$class_name])) {
@@ -21,7 +24,11 @@ class OT {
         return self::$_object_store[$class_name];
     }
     
-    public static function getConfigKey($key, $null = null)
+    /**
+     * Get config value by key, allows for returnable value if config key 
+     * is not set
+     */
+    public static function getConfigKey($key, $ret = null)
     {
         if (!self::$config) {
             self::$system = dirname(dirname(__FILE__));
@@ -31,9 +38,12 @@ class OT {
         if (isset(self::$config[$key])) {
             return self::$config[$key];
         }
-        return $null;
+        return $ret;
     }
     
+    /**
+     * Load config 
+     */
     public static function loadConfig()
     {
         if (!is_file(self::$system . '/lib/config.php')) {
@@ -43,7 +53,9 @@ class OT {
         self::$config = include self::$system . '/lib/config.php';
     }
 
-    
+    /**
+     * Get IP Address of a user
+     */
     public static function getIP()
     {
         $ip = '0.0.0.0';

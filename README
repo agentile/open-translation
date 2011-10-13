@@ -3,14 +3,20 @@ Open-translation (for lack of a better name)
 The idea of this code is to provide web-site visitors the 
 ability to help provide text translations for a web-site.
 
-Using JS, when a user highlight a portion of text, an option
-will be available to provide a translation for select text.
-For selected text that already have translation submissions, 
-the user will be able to vote up or down (This is how facebook 
-provided accurate translations while pushing the work off to 
-their user base). 
+Using JS, a developer can provide a context for users to provide 
+translations for text on a website. For text that already has 
+translation submissions, the user will be able to vote up or down.
 
 These translations submissions can be viewed by a web-site 
-administrator which can then be used to update locale entries.
+administrator who can then use that information to update locale 
+entries.
 
+If you are looking to provide localization for a web-site, an 
+introductory article that may be helpful is as follows:
 http://phpadvent.org/2010/localization-by-anthony-gentile
+
+
+Authors:
+Anthony Gentile 
+Nano Anderson
+Brian McAllister

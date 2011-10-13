@@ -1,6 +1,6 @@
 <?php
 /**
- * SolateLite DB Abstract Connection Class For use in OT
+ * OT_DB, heavy usage of SolateLite DB class
  */
 class OT_DB 
 {
@@ -921,6 +921,9 @@ class OT_DB
         return $result->rowCount();
     }
     
+    /**
+     * Helper function to fetch all records
+     */
     public function fetchAll($stmt, $data = array(), $fetch_mode = PDO::FETCH_ASSOC)
     {
         // perform query
@@ -928,6 +931,9 @@ class OT_DB
         return $sth->fetchAll($fetch_mode);
     }
 
+    /**
+     * Helper function to fetch one records
+     */
     public function fetchOne($stmt, $data = array(), $fetch_mode = PDO::FETCH_ASSOC)
     {
         // perform query
@@ -935,12 +941,17 @@ class OT_DB
         return $sth->fetch($fetch_mode);
     }
     
+    /**
+     * Fetch all translations
+     */
     public function fetchAllTranslations()
     {
         $sql = "SELECT * FROM ot_translations";
         return $this->fetchAll($sql);
     }
-    
+    /**
+     * Fetch Translations by native code, native text and translated code by page
+     */
     public function fetchPageTranslations($url, $ncode, $ntext, $tcode)
     {
         $sql = "SELECT * 
@@ -959,6 +970,9 @@ class OT_DB
         return $this->fetchAll($sql, $data);
     }
     
+    /**
+     * Fetch Translations by native code, native text and translated code
+     */
     public function fetchTranslationsByNativeTextAndTranslatedCode($ncode, $ntext, $tcode)
     {
         $sql = "SELECT * 
@@ -975,6 +989,9 @@ class OT_DB
         return $this->fetchAll($sql, $data);
     }
     
+    /**
+     * Fetch an entry by its unique identifying columns
+     */
     public function fetchTranslationByMeta($ncode, $ntext, $tcode, $ttext)
     {
         $sql = "SELECT * 
@@ -993,6 +1010,9 @@ class OT_DB
         return $this->fetchOne($sql, $data);
     }
     
+    /**
+     * Create a new translation entry
+     */
     public function insertEntry($url, $native_code, $native_text, $translated_code, $translated_text, $ip)
     {
         // does this entry already exist?
@@ -1013,6 +1033,9 @@ class OT_DB
         return $this->insert('ot_translations', $data);
     }
     
+    /**
+     * fetch translation by translation_id
+     */
     public function fetchById($tid) 
     {
         $sql = "SELECT * 
@@ -1025,6 +1048,9 @@ class OT_DB
         return $this->fetch($sql, $data);
     }
     
+    /**
+     * vote a translation up by translation_id
+     */
     public function voteUpById($tid, $ip)
     {
         if (!$this->isInt($tid)) {
@@ -1046,6 +1072,9 @@ class OT_DB
         $this->update('ot_translations', $data, $where);
     }
     
+    /**
+     * vote a translation down by translation_id
+     */
     public function voteDownById($tid, $ip)
     {
         if (!$this->isInt($tid)) {
@@ -1067,6 +1096,9 @@ class OT_DB
         $this->update('ot_translations', $data, $where);
     }
     
+    /**
+     * checks if something is an integer, even if a string.
+     */
     public function isInt($value) 
     {
         if (is_int($value)) {
