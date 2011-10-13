@@ -2,15 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Open Translation Example</title>
+<title>Open Translation Documentation</title>
 <link rel="stylesheet" href="/ot/css/ot.css" type="text/css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 <script src="/ot/js/open-translation.js"></script>
 </head>
 <body>
-<p>Some example of text, select me.</p><br/>
+<header>
+<h1 data-translatable-id="header">Welcome to Open-Translation</h1>
+<p data-translatable-id="project_description">This is the description of the open-translation project</p>
 <p class="ot_translatable">Example using 'ot_translatable' class.</p>
+
 <script type="text/javascript">
 ot.init({
     native_locale: 'en_US',
