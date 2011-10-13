@@ -9,15 +9,29 @@ var ot = {
       // track individual translatable elements
       translatable_attribute : 'data-translatable-id',
       
-      body_translatable_class : 'translatable'
+      body_translatable_class : 'translatable',
       
       ajax_url : '/ot/lib/ajax.php'
       
     },
     
+      // default options
+    options : {
+        native_locale: 'en_US',
+        csrf_token: '',
+        translate_type: 'all' // class, selected, all
+    },
+    
     displayTranslateRequest : function(translatable_id,text) {
       
-      var self = this;
+      var self = this,
+          responses;
+      
+      $.ajax({
+        url: (self.C.ajax_url + '?ajax_action=fetch_page_translations&key=' + translatable_id + '&locale=' + $('#ot_header select option:selected').val()),
+        type: 'GET',
+        
+      })
       
       t = $('#ot_translate');
       t.html('');
@@ -60,28 +74,38 @@ var ot = {
       
     },
     
+    submitTranslation : function(native_text,translated_code,translated_text) {
+      
+      var self = this;
+      
+      $.ajax({
+        url: (self.C.ajax_url + '?ajax_action=create_translation_entry&page=home&native_code=&native_text=&translated_code=&translated_text='),
+        type: 'POST',
+        data: {
+          'page':'home',
+          'native_code': self.options.native_locale,
+          'native_text':native_text,
+          'translated_code':translated_code,
+          'translated_text':translated_text
+        }
+      })
+    },
+    
     init : function($options) {
       
       var self = this;
-        
-        // default options
-      options = {
-          native_locale: 'en_US',
-          csrf_token: '',
-          translate_type: 'all' // class, selected, all
-      };
 
       // load options
       if ($options.native_locale) {
-          options.native_locale = $options.native_locale;
+          self.options.native_locale = $options.native_locale;
       }
 
       if ($options.csrf_token) {
-          options.csrf_token = $options.csrf_token;
+          self.options.csrf_token = $options.csrf_token;
       }
 
       if ($options.translate_type) {
-          options.translate_type = $options.translate_type;
+          self.options.translate_type = $options.translate_type;
       }
       
       // Add the open-translation box to the body
@@ -148,8 +172,8 @@ var ot = {
               type: 'GET',
               data: {
                   ajax_action: 'fetch_available_locales',
-                  native_code: options.native_code,
-                  csrf_token: options.csrf_token
+                  native_code: self.options.native_code,
+                  csrf_token: self.options.csrf_token
               },
               dataType: 'json',
               success: function(result) {
@@ -186,9 +210,9 @@ var ot = {
               data: {
                   ajax_action: 'fetch_page_translation',
                   page: window.location.pathname,
-                  native_code: options.native_code,
+                  native_code: self.options.native_code,
                   text: selected,
-                  csrf_token: options.csrf_token
+                  csrf_token: self.options.csrf_token
               },
               dataType: 'json',
               success: function(result) {
