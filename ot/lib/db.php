@@ -995,7 +995,7 @@ class OT_DB
         }
         
         $data = array(
-            'vote_up' = $t['vote_up'] + 1,
+            'vote_up' => $t['vote_up'] + 1,
         );
         
         $where = array('translation_id = ?' => array($tid));
@@ -1016,7 +1016,7 @@ class OT_DB
         }
         
         $data = array(
-            'vote_down' = $t['vote_down'] + 1,
+            'vote_down' => $t['vote_down'] + 1,
         );
         
         $where = array('translation_id = ?' => array($tid));
