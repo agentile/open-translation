@@ -7,3 +7,5 @@ body.translatable #ot_box>#ot_header{float:left;margin-left:20px;color:white;fon
 .ot-translate-this{display:inline-block;font-size:50px;color:#000;position:relative;}
 .ot-translate-this:before,.ot-translate-this:after{content:'\201C';display:block;width:15px;height:15px;position:absolute;top:-8px;left:-35px;}
 .ot-translate-this:after{content:'\201E';left:auto;top:-30px;right:-25px;}
+.ot-pill{-webkit-border-radius:100px;-moz-border-radius:100px;border-radius:100px;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box;}
+.ot-submit{display:block;width:85px;height:35px;font:100 18px sans-serif;color:#fff;line-height:35px;text-align:center;text-decoration:none;background:#000;}
