@@ -956,4 +956,17 @@ class OT_DB
         );
         return $this->fetchAll($sql, $data);
     }
+    
+    public function insertEntry($page, $native_code, $native_text, $translated_code, $translated_text, $ip)
+    {
+        $data = array(
+            'url' => $page,
+            'native_locale_code' => $native_code,
+            'native_text' => $native_text,
+            'translated_locale_code' => $translated_code,
+            'translated_text' => $translated_text,
+            'ip' = ip2long($ip),
+        );
+        return $this->insert('ot_translations', $data);
+    }
 }

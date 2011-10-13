@@ -99,6 +99,17 @@ class OT_Ajax {
         $this->data = $this->ot->config['translations']['available_locales'];
         $this->success = true;
     }
+    
+    public function ajax_create_translation_entry()
+    {
+        $page = $this->_post['page'];
+        $native_code = $this->_post['native_code'];
+        $native_text = $this->_post['native_text'];
+        $translated_code = $this->_post['translated_code'];
+        $translated_text = $this->_post['translated_text'];
+        $ip = OT::getIP();
+        $this->success = $this->ot->database->insertEntry($page, $native_code, $native_text, $translated_code, $translated_text, $ip);
+    }
 }
 
 $ajax = new OT_Ajax();
