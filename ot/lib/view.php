@@ -59,12 +59,18 @@ class OT_View
         );
     }
     
+    public function setLocale($config)
+    {
+        if (!$this->_locale) {
+            $this->_locale = OT::getObject('OT_Locale', $config); 
+        }
+    }
+    
     public function locale($key, $replace = null)
     {
         if (!$this->_locale) {
-            $ot = new OT();
-            $ot->start();
-            $this->_locale = $ot->getLocaleObject($ot->config['native_locale']);
+            $locale_settings = OT::getConfigKey('native_locale');
+            $this->setLocale($local_settings);
         }
         return $this->_locale->locale($key, $replace);
     }

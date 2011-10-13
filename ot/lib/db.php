@@ -965,7 +965,7 @@ class OT_DB
             'native_text' => $native_text,
             'translated_locale_code' => $translated_code,
             'translated_text' => $translated_text,
-            'ip' = ip2long($ip),
+            'ip' => ip2long($ip),
         );
         return $this->insert('ot_translations', $data);
     }

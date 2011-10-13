@@ -38,9 +38,15 @@ class OT_Locale
      * @see
      * @since
      */
-    public function __construct(array $default = array())
+    public function __construct($config = array())
     {
-        $this->default = array_merge_recursive($this->default, $default);
+        if (isset($config['code'])) {
+            $this->default['code'] = $config['code'];
+        }
+        
+        if (isset($config['path'])) {
+            $this->default['path'] = $config['path'];
+        }
     }
     
     /**
