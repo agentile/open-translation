@@ -37,6 +37,11 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
 	<h3>
 	<p data-translatable-id="example_text">Example using 'data-translatable-id' attribute class.</p>
 
+
+  <input type="text" class="ot-add-translation" />
+  <blockquote class="ot-translate-this">Translate this</blockquote>
+
+
 	<script type="text/javascript">
 	ot.init({
 	    native_locale: 'en_US',

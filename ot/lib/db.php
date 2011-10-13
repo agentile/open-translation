@@ -969,4 +969,68 @@ class OT_DB
         );
         return $this->insert('ot_translations', $data);
     }
+    
+    public function fetchById($tid) 
+    {
+        $sql = "SELECT * 
+                FROM ot_translations
+                WHERE translation_id = :tid";
+        
+        $data = array(
+            'tid' => $tid,
+        );
+        return $this->fetch($sql, $data);
+    }
+    
+    public function voteUpById($tid, $ip)
+    {
+        if (!$this->isInt($tid)) {
+            return false;
+        }
+        
+        $t = $this->fetchById($tid);
+        
+        if (!$t || long2ip($t['ip']) == $ip) {
+            return false;
+        }
+        
+        $data = array(
+            'vote_up' = $t['vote_up'] + 1,
+        );
+        
+        $where = array('translation_id = ?' => array($tid));
+        
+        $this->update('ot_translations', $data, $where);
+    }
+    
+    public function voteDownById($tid, $ip)
+    {
+        if (!$this->isInt($tid)) {
+            return false;
+        }
+        
+        $t = $this->fetchById($tid);
+        
+        if (!$t || long2ip($t['ip']) == $ip) {
+            return false;
+        }
+        
+        $data = array(
+            'vote_down' = $t['vote_down'] + 1,
+        );
+        
+        $where = array('translation_id = ?' => array($tid));
+        
+        $this->update('ot_translations', $data, $where);
+    }
+    
+    public function isInt($value) 
+    {
+        if (is_int($value)) {
+            return true;
+        }
+        
+        // otherwise, must be numeric, and must be same as when cast to int
+        return is_numeric($value) && $value == (int) $value;
+    }
 }
