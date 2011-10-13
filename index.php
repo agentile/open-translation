@@ -29,7 +29,7 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
 </head>
 <body>
 	<header>
-		<h1 data-translatable-id="header"><?php echo $locale->fetch('WELCOME');?></h1>
+		<h1 data-translatable-id="WELCOME"><?php echo $locale->fetch('WELCOME');?></h1>
 		<p data-translatable-id="project_description">This is the description of the open-translation project</p>
 	</header>
 	<hr />
