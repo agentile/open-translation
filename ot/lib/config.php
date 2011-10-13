@@ -2,7 +2,7 @@
 $config = array();
 
 $config['database'] = array(
-    'type' => 'pgsl',
+    'type' => 'pgsql',
     'host' => 'localhost',
     'user' => 'otdev',
     'pass' => 'P@!zxcvLoRzz2',

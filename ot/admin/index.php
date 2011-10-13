@@ -4,5 +4,6 @@
 require dirname(dirname(__FILE__)) . '/lib/ot.php';
 $ot = new OT();
 $ot->start();
-$ot->view->render(array(), 'index/main');
+$results = $ot->database->fetchAllTranslations();
+$ot->view->render(array('translations' => $results), 'index/main');
 ?>

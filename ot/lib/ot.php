@@ -8,6 +8,7 @@ class OT {
     public static $system;
     public $database;
     public $view;
+    public $config = array();
     
     public function __construct()
     {
@@ -16,10 +17,16 @@ class OT {
     
     public function start()
     {
+        if (!is_file(self::$system . '/lib/config.php')) {
+            die('Please create a config.php file');
+        }
+        
+        $this->config = include self::$system . '/lib/config.php';
+        
         // ramp up some OT objects
         if (!isset($this->database)) {
             require self::$system . '/lib/database.php';
-            $this->database = new OT_DB();
+            $this->database = new OT_DB($this->config['database']);
         }
         
         if (!isset($this->view)) {
