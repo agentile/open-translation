@@ -21,9 +21,11 @@ var ot = {
       t.html('');
       t.append('<div class="container"></div>');
       c = $(t.children('.container'));
-      c.append('<p class="text">' + text + '</div>');
+      c.append('<blockquote class="ot-translate-this">' + text + '</blockquote>');
       c.append('<ul class="responses"><li class="positive">Response1</li><li class="positive">Response2</li><li class="negative">Response3</li></ul>');
       c.append('<p><a class="showtextfield" href="javascript:;">Submit your own translation</a></p>');
+      c.append('<p><input type="text" class="ot-add-translation" /></p>')
+      c.append('<a href="#" class="ot-submit ot-pill">Submit</a>');
       c.append('<p><a class="cancel close" href="javascript:;">Cancel</a></p>');
       t.fadeIn();
       
