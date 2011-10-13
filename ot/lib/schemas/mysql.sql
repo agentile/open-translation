@@ -1,16 +1,10 @@
 CREATE TABLE ot_translations (
-  translation_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  locale_code VARCHAR(10) NOT NULL,
-  page TEXT NOT NULL,
-  original LONGTEXT NOT NULL,
-  translation LONGTEXT NOT NULL,
-  PRIMARY KEY (translation_id)
-) ENGINE=INNODB DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
-CREATE TABLE ot_votes (
-  vote_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  translation_id BIGINT UNSIGNED NOT NULL,
+  translation_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  url TEXT NOT NULL,
+  native_locale_code VARCHAR(10) NOT NULL,
+  native_text LONGTEXT NOT NULL,
+  translated_locale_code VARCHAR(10) NOT NULL,
+  translated_text LONGTEXT NOT NULL,
   ip INT NOT NULL,
-  result TINYINT SIGNED DEFAULT 0,
-  PRIMARY KEY (vote_id)
+  PRIMARY KEY (translation_id)
 ) ENGINE=INNODB DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;

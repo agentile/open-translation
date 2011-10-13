@@ -2,12 +2,13 @@
 $config = array();
 
 $config['database'] = array(
-    'type' => 'pgsql',
+    'type' => 'mysql',
     'host' => 'localhost',
-    'user' => 'otdev',
-    'pass' => 'P@!zxcvLoRzz2',
-    'name' => 'otdev',
+    'user' => 'testing',
+    'pass' => 'testing',
+    'name' => 'test',
 );
+
 
 $config['native_locale'] = array(
     'code' => 'en_US',
@@ -122,5 +123,6 @@ $config['available_locales'] = array(
     'uk_UA' => 'Ukrainian (Ukraine)',
     'vi_VN' => 'Vietnamese (Vietnam)',
 );
+
 
 return $config;

@@ -2,7 +2,7 @@
 /**
  * AJAX Dispatcher
  */
-require_once 'database.php';
+require_once 'ot.php';
 class OT_Ajax {
 
     // Ajax response properties
@@ -16,7 +16,7 @@ class OT_Ajax {
     protected $_get  = array();
 
     // Database
-    protected $_db = null;
+    protected $ot = null;
 
     /**
      * _construct
@@ -31,7 +31,8 @@ class OT_Ajax {
         $this->_post = $_POST;
         $this->_get  = $_GET;
 
-        $this->_db = new OT_DB();
+        $this->ot = new OT();
+        $this->ot->start();
 
         // look for ajax_action to properly dispatch
         if (isset($this->_post['ajax_action'])) {
@@ -88,16 +89,26 @@ class OT_Ajax {
         $page = $this->_get['page'];
         $code = $this->_get['native_code'];
         $text = $this->_get['selected'];
-        $this->data = $this->_db->fetchPageTranslation($page, $code, $text);
+        $this->data = $this->ot->database->fetchPageTranslation($page, $code, $text);
         $this->success = true;
     }
 
     public function ajax_fetch_available_locales()
     {
         $config = include 'config.php';
-        $locales = $config['translations']['available_locales'];
-        $this->data = $locales;
+        $this->data = $this->ot->config['translations']['available_locales'];
         $this->success = true;
+    }
+    
+    public function ajax_create_translation_entry()
+    {
+        $page = $this->_post['page'];
+        $native_code = $this->_post['native_code'];
+        $native_text = $this->_post['native_text'];
+        $translated_code = $this->_post['translated_code'];
+        $translated_text = $this->_post['translated_text'];
+        $ip = OT::getIP();
+        $this->success = $this->ot->database->insertEntry($page, $native_code, $native_text, $translated_code, $translated_text, $ip);
     }
 }
 

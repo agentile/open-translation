@@ -38,12 +38,14 @@ class OT_Locale
      * @see
      * @since
      */
-    public function __construct(array $default = array())
+    public function __construct($config = array())
     {
-        $this->default = array_merge_recursive($this->default, $default);
-
-        if (!$this->default['path'] && is_dir(__DIR__ . '/Locale')) {
-            $this->default['path'] = __DIR__ . '/Locale';
+        if (isset($config['code'])) {
+            $this->default['code'] = $config['code'];
+        }
+        
+        if (isset($config['path'])) {
+            $this->default['path'] = $config['path'];
         }
     }
     
@@ -180,14 +182,14 @@ class OT_Locale
         }
 
         $file = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $this->default['code'] . '.php';
-        
+
         // can we find the file?
         if (file_exists($file)) {
             // put the locale values into the shared locale array
             $this->trans[$code] = (array) include $file;
         } else {
             // could not find file.
-            //throw new Exception\NotFound;
+            die("locale file: $file not found");
         }
     }
 }
