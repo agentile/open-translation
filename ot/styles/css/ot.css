@@ -1,3 +1,67 @@
+<<<<<<< HEAD
+body.translatable [data-translatable-id] {
+  background: #ccfa02;
+}
+body.translatable [data-translatable-id]:hover {
+  cursor: pointer;
+  background: #71fa02;
+}
+body.translatable #ot_translate {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #fff;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+  z-index: 800;
+  text-align: center;
+}
+body.translatable #ot_translate > .container {
+  width: 400px;
+  margin: 0 auto;
+}
+body.translatable #ot_translate ul.responses > li.positive {
+  background: #b1f89d;
+}
+body.translatable #ot_translate ul.responses > li.negative {
+  background: #f6aa9d;
+}
+body.translatable #ot_box {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 50px;
+  padding: 10px 20px 10px 30px;
+  background: #0e0e11;
+  opacity: 0.88;
+  font-family: 'Verdana';
+  font-size: 12px;
+  z-index: 999;
+}
+body.translatable #ot_box > #ot_spinner {
+  float: left;
+  margin-top: 12px;
+}
+body.translatable #ot_box > #ot_header {
+  float: left;
+  margin-left: 20px;
+  color: white;
+  font-size: 18px;
+}
+body.translatable #ot_box > #ot_header > select {
+  margin-left: 0.5em;
+  font-size: 18px;
+}
+#ot_box, #ot_translate {
+  display: none;
+}
+#ot_box p {
+  padding: 0px;
+  display: inline;
+}
+=======
 body.translatable [data-translatable-id]{background:#ccfa02;}
 body.translatable #ot_box{display:block;position:absolute;top:20px;left:20px;border-radius:50px;padding:10px 20px 10px 30px;background:#0e0e11;opacity:0.88;font-family:'Verdana';font-size:12px;z-index:999;}body.translatable #ot_box>#ot_spinner{float:left;margin-top:12px;}
 body.translatable #ot_box>#ot_header{float:left;margin-left:20px;color:white;font-size:18px;}body.translatable #ot_box>#ot_header>select{margin-left:0.5em;font-size:18px;}
@@ -7,5 +71,4 @@ body.translatable #ot_box>#ot_header{float:left;margin-left:20px;color:white;fon
 .ot-translate-this{display:inline-block;font-size:50px;color:#000;position:relative;}
 .ot-translate-this:before,.ot-translate-this:after{content:'\201C';display:block;width:15px;height:15px;position:absolute;top:-8px;left:-35px;}
 .ot-translate-this:after{content:'\201E';left:auto;top:-30px;right:-25px;}
-.ot-pill{-webkit-border-radius:100px;-moz-border-radius:100px;border-radius:100px;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box;}
-.ot-submit{display:block;width:85px;height:35px;font:100 18px sans-serif;color:#fff;line-height:35px;text-align:center;text-decoration:none;background:#000;}
+>>>>>>> dcddee3afb8ca0eaf0eb0e71b67f4ead5e3b6815

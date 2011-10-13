@@ -29,18 +29,13 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
 </head>
 <body>
 	<header>
-		<h1 data-translatable-id="header"><?php echo $locale->fetch('WELCOME');?></h1>
-		<p data-translatable-id="project_description">This is the description of the open-translation project</p>
+		<h1 data-translatable-id="WELCOME"><?php echo $locale->fetch('WELCOME');?></h1>
+		<p data-translatable-id="project_description">This is the description of the open-translation project. <a href="/#translate">Turn On Translation</a></p>
 	</header>
 	<hr />
 	<h2 data-translatable-id="instructions_header">How to use Open-Translation</h2>
 	<h3>
 	<p data-translatable-id="example_text">Example using 'data-translatable-id' attribute class.</p>
-
-
-  <input type="text" class="ot-add-translation" />
-  <blockquote class="ot-translate-this">Translate this</blockquote>
-  <a href="#" class="ot-submit ot-pill">Submit</a>
 
 
 	<script type="text/javascript">
