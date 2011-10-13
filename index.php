@@ -14,6 +14,7 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], array_keys($accepted_languag
 }
 
 $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__) . '/locales'));
+$locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__) . '/locales', 'fallback_code' => 'en_US'));
 ?>
 <!DOCTYPE html>
 <head>
@@ -28,36 +29,42 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
 	<script src="/ot/js/open-translation.js<?php echo '?' . filemtime(dirname(__FILE__) . '/ot/js/open-translation.js');?>"></script>
 </head>
 <body>
+  <div class="ot-mode-indicator">
+    <h1>My language:</h1>
+    <span class="ot-mode-language">French</span>
+  </div>
+  
+  
 	<header>
 		<h1 data-translatable-id="WELCOME"><?php echo $locale->fetch('WELCOME');?></h1>
-		<p data-translatable-id="project_description">This is the description of the open-translation project. <a href="/#translate">Turn On Translation</a></p>
+		<p data-translatable-id="project_description"><?php echo $locale->fetch('PROJECT_DESCRIPTION');?><a href="/#translate">Turn On Translation</a></p>
 	</header>
 	<hr />
-	<h2 data-translatable-id="instructions_header">How to use Open-Translation</h2>
+	<h2 data-translatable-id="instructions_header"><?php echo $locale->fetch('INSTRUCTIONS_HEADER');?></h2>
 	<h3>
-	<p data-translatable-id="example_text">Example using 'data-translatable-id' attribute class.</p>
+	<p data-translatable-id="example_text"><?php echo $locale->fetch('EXAMPLE_TEXT');?></p>
 
 
   <!-- <input type="text" class="ot-add-translation" />
-   <blockquote class="ot-translate-this">Translate this</blockquote>
-   <a href="#" class="ot-submit ot-pill">Submit</a>
-   
-   <ul class="ot-submitted-translations-list">
-     <li class="ot-list-green">
-       Some text
-       <span>+3</span>
-     </li>
-     
-     <li class="ot-list-green">
-       More text
-       <span>+2</span>
-     </li>
-     
-     <li class="ot-list-red">
-       Extra stuff
-       <span>-3</span>
-     </li>
-   </ul>
+  <blockquote class="ot-translate-this"><?php echo $locale->fetch('TRANSLATE_THIS');?></blockquote>
+  <a href="#" class="ot-submit ot-pill"><?php echo $locale->fetch('SUBMIT');?></a>
+  
+  <ul class="ot-submitted-translations-list">
+    <li class="ot-list-green">
+      Some text
+      <span>+3</span>
+    </li>
+    
+    <li class="ot-list-green">
+      More text
+      <span>+2</span>
+    </li>
+    
+    <li class="ot-list-red">
+      Extra stuff
+      <span>-3</span>
+    </li>
+  </ul>
 
    <div class="ot-translateable ot-need-translation"></div>
    <div class="ot-translateable ot-has-translation"></div> -->

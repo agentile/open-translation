@@ -1,6 +1,5 @@
 <?php
 /**
- * 
  * OT Locale
  */
 class OT_Locale
@@ -23,6 +22,7 @@ class OT_Locale
      */
     protected $default = array(
         'code' => 'en_US',
+        'fallback_code' => 'en_US',
         'path' => null,
     );
 
@@ -42,6 +42,10 @@ class OT_Locale
     {
         if (isset($config['code'])) {
             $this->default['code'] = $config['code'];
+        }
+        
+        if (isset($config['fallback_code'])) {
+            $this->default['fallback_code'] = $config['fallback_code'];
         }
         
         if (isset($config['path'])) {
@@ -160,6 +164,19 @@ class OT_Locale
             return vsprintf($this->trans[$this->default['code']][$key], $replace);
         }
         
+        // we don't have a key, lets try the fallback locale
+        if ($this->default['fallback_code']) {
+            if (!isset($this->trans[$this->default['fallback_code']])) {
+                $this->load($this->default['fallback_code']);
+            }
+            
+            if (isset($this->trans[$this->default['fallback_code']][$key]) && !$replace) {
+                return $this->trans[$this->default['fallback_code']][$key];
+            } elseif (isset($this->trans[$this->default['fallback_code']][$key])) {
+                return vsprintf($this->trans[$this->default['fallback_code']][$key], $replace);
+            }
+        }
+        
         return null;
     }
     
@@ -181,7 +198,7 @@ class OT_Locale
             $path = $this->default['path'];
         }
 
-        $file = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $this->default['code'] . '.php';
+        $file = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $code . '.php';
 
         // can we find the file?
         if (file_exists($file)) {

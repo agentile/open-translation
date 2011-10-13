@@ -1,6 +1,7 @@
 <?php
 /**
- * AJAX Dispatcher
+ * OT_Ajax 
+ * AJAX Dispatcher - fairly hokey.
  */
 require_once 'ot.php';
 class OT_Ajax {
@@ -84,6 +85,10 @@ class OT_Ajax {
         echo json_encode($ret);
     }
 
+    /**
+     * fetch all translations given a page url, the native code, 
+     * the translated code (locale code you are going to), and native text
+     */
     public function ajax_fetch_page_translations()
     {
         $page = $this->_get['url'];
@@ -94,6 +99,10 @@ class OT_Ajax {
         $this->success = true;
     }
     
+    /**
+     * fetch all translations the native code, native text, and
+     * the translated code (locale code you are going to)
+     */
     public function ajax_fetch_translations_by_native_text_and_translated_code()
     {
         $ncode = $this->_get['native_code'];
@@ -103,12 +112,19 @@ class OT_Ajax {
         $this->success = true;
     }
 
+    /**
+     * Get all the available locales to translate to, provided by the config
+     */
     public function ajax_fetch_available_locales()
     {
         $this->data = OT::getConfigKey('available_locales', array());
         $this->success = true;
     }
     
+    /**
+     * Check to see if an entry already exists given its unique identifying
+     * columns
+     */
     public function ajax_entry_exists()
     {
         $native_code = $this->_post['native_code'];
@@ -124,6 +140,10 @@ class OT_Ajax {
         $this->success;
     }
     
+    /**
+     * Create a new translation entry ... this should be done after an
+     * entry_exists call is made
+     */
     public function ajax_create_translation_entry()
     {
         $page = $this->_post['page'];
@@ -135,11 +155,17 @@ class OT_Ajax {
         $this->success = $this->db->insertEntry($page, $native_code, $native_text, $translated_code, $translated_text, $ip);
     }
     
+    /**
+     * Vote up and existing translation (by translation_id)
+     */
     public function ajax_vote_up()
     {
         $this->success = $this->db->voteUpById($this->_post['tid'], OT::getIP());
     }
-    
+
+    /**
+     * Vote down and existing translation (by translation_id)
+     */
     public function ajax_vote_down()
     {
         $this->success = $this->db->voteDownById($this->_post['tid'], OT::getIP());

@@ -1,6 +1,5 @@
 <?php
 /**
- * 
  * OT View
  */
 class OT_View
@@ -16,12 +15,18 @@ class OT_View
         'charset' => 'UTF-8',
     );
     
+    /**
+     * Set some admin specific view/layout paths.
+     */
     public function __construct()
     {
         $this->layout_path = dirname(dirname(__FILE__)) . '/admin/layout/';
         $this->view_path = dirname(dirname(__FILE__)) . '/admin/views/';
     }
     
+    /**
+     * Render view and layout. Set properties to be usable in views.
+     */
     public function render($vars, $view)
     {
         foreach ($vars as $key => $val) {
@@ -59,6 +64,9 @@ class OT_View
         );
     }
     
+    /**
+     * Set locale object if it doesn't exist.
+     */
     public function setLocale($config)
     {
         if (!$this->_locale) {
@@ -66,6 +74,9 @@ class OT_View
         }
     }
     
+    /**
+     * Locale view helper method
+     */
     public function locale($key, $replace = null)
     {
         if (!$this->_locale) {
