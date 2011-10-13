@@ -59,6 +59,11 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
     </li>
   </ul>
 
+  <div class="ot-translateable ot-need-translation"></div>
+  <div class="ot-translateable ot-has-translation"></div>
+
+
+
 	<script type="text/javascript">
 	ot.init({
 	    native_locale: 'en_US',
