@@ -2,7 +2,22 @@ var options = {};
 var selected = '';
 var ot =
 {
+  
+    // Constants
+    C : {
+      
+      // This is the HTML5 attribute that is used to
+      // track individual translatable elements
+      translatable_attribute : 'data-translatable-id',
+      
+      body_translatable_class : 'translatable'
+      
+    },
+    
     init : function($options) {
+      
+      var self = this;
+        
         // default options
         options = {
             native_locale: 'en_US',
@@ -22,8 +37,23 @@ var ot =
         if ($options.translate_type) {
             options.translate_type = $options.translate_type;
         }
-
-        $('body').prepend('<div id="ot_box" style="display:none"></div>');   
+        
+        // Add the open-translation box to the body
+        $('body').append('<div id="ot_box"><div id="ot_spinner"></div><div id="ot_header"><span>Translating to:</span></div>');
+        $('#ot_header').append('<select><option>Français</option><option>Español</option>')
+        var spinner_opts = {
+          lines: 10, // The number of lines to draw
+          length: 0, // The length of each line
+          width: 8, // The line thickness
+          radius: 0, // The radius of the inner circle
+          color: '#fff', // #rgb or #rrggbb
+          speed: 1.1, // Rounds per second
+          trail: 42, // Afterglow percentage
+          shadow: false // Whether to render a shadow
+        };
+        var spinner = new Spinner(spinner_opts).spin();
+        var target = document.getElementById('ot_spinner');
+        target.appendChild(spinner.el)
 
         $(document).mouseup(function() {
             selected = getSelectedText();
@@ -36,8 +66,8 @@ var ot =
             }
         });
 
-        $('.ot_translatable').live('click', function(e) {
-            selected = $('.ot_translatable').text();
+        $('[' + self.C.translatable_attribute + ']').live('click', function(e) {
+            selected = $(this).text();
             displayTranslateRequest();
         });
 
@@ -50,6 +80,14 @@ var ot =
             e.preventDefault();
             $(this).parent('div').hide();
         });
+        
+        function watchHash() {
+          $(window).bind('hashchange', function() {
+            if (window.hash.indexOf('translate') > -1)
+              $('body').addClass(C.body_translatable_class);
+          });
+        }
+        watchHash();
 
         function selectLocale()
         {
