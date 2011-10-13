@@ -73,6 +73,7 @@ body.translatable {
   width: 520px;
   padding: 18px 0;
   font: 100 30px sans-serif;
+  color: #000;
   text-align: center;
   border: 0;
   outline: none;
@@ -91,4 +92,29 @@ body.translatable {
   background: -ms-linear-gradient(top, rgba(250,250,250,1) 0%,rgba(255,255,255,1) 100%);
   filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#ffffff',GradientType=0 )";
   background: linear-gradient(top, rgba(250,250,250,1) 0%,rgba(255,255,255,1) 100%);
+}
+
+.ot-translate-this {
+  display: inline-block;
+  font-size: 50px;
+  color: #000;
+  position: relative;
+}
+
+.ot-translate-this:before,
+.ot-translate-this:after {
+  content: '\201C';
+  display: block;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: -8px;
+  left: -35px;
+}
+
+.ot-translate-this:after {
+  content: '\201E';
+  left: auto;
+  top: -30px;
+  right: -25px;
 }

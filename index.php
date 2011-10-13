@@ -39,6 +39,7 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
 
 
   <input type="text" class="ot-add-translation" />
+  <blockquote class="ot-translate-this">Translate this</blockquote>
 
 
 	<script type="text/javascript">
