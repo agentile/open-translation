@@ -11,6 +11,8 @@ var ot = {
       
       body_translatable_class : 'translatable'
       
+      ajax_url : '/ot/lib/ajax.php'
+      
     },
     
     displayTranslateRequest : function(translatable_id,text) {
