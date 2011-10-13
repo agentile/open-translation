@@ -16,7 +16,7 @@ class OT_Ajax {
     protected $_get  = array();
 
     // Database
-    protected $ot = null;
+    protected $db = null;
 
     /**
      * _construct
@@ -31,8 +31,8 @@ class OT_Ajax {
         $this->_post = $_POST;
         $this->_get  = $_GET;
 
-        $this->ot = new OT();
-        $this->ot->start();
+        $db_config = OT::getConfigKey('database');
+        $this->db = OT::getObject('OT_DB', $db_config); 
 
         // look for ajax_action to properly dispatch
         if (isset($this->_post['ajax_action'])) {
@@ -89,14 +89,13 @@ class OT_Ajax {
         $page = $this->_get['page'];
         $code = $this->_get['native_code'];
         $text = $this->_get['selected'];
-        $this->data = $this->ot->database->fetchPageTranslation($page, $code, $text);
+        $this->data = $this->db->fetchPageTranslation($page, $code, $text);
         $this->success = true;
     }
 
     public function ajax_fetch_available_locales()
     {
-        $config = include 'config.php';
-        $this->data = $this->ot->config['translations']['available_locales'];
+        $this->data = OT::getConfigKey('available_locales', array());
         $this->success = true;
     }
     
@@ -108,7 +107,17 @@ class OT_Ajax {
         $translated_code = $this->_post['translated_code'];
         $translated_text = $this->_post['translated_text'];
         $ip = OT::getIP();
-        $this->success = $this->ot->database->insertEntry($page, $native_code, $native_text, $translated_code, $translated_text, $ip);
+        $this->success = $this->db->insertEntry($page, $native_code, $native_text, $translated_code, $translated_text, $ip);
+    }
+    
+    public function ajax_vote_up()
+    {
+        $this->success = $this->db->voteUpById($this->_post['tid'], OT::getIP());
+    }
+    
+    public function ajax_vote_down()
+    {
+        $this->success = $this->db->voteDownById($this->_post['tid'], OT::getIP());
     }
 }
 
