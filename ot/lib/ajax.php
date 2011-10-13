@@ -86,18 +86,20 @@ class OT_Ajax {
 
     public function ajax_fetch_page_translations()
     {
-        $page = $this->_get['page'];
-        $code = $this->_get['native_code'];
-        $text = $this->_get['selected'];
-        $this->data = $this->db->fetchPageTranslations($page, $code, $text);
+        $page = $this->_get['url'];
+        $ncode = $this->_get['native_code'];
+        $tcode = $this->_get['translated_code'];
+        $ntext = $this->_get['native_text'];
+        $this->data = $this->db->fetchPageTranslations($url, $ncode, $ntext, $tcode);
         $this->success = true;
     }
     
-    public function ajax_fetch_translations_by_key()
+    public function ajax_fetch_translations_by_native_text_and_translated_code()
     {
-        $code = $this->_get['native_code'];
-        $text = $this->_get['key'];
-        $this->data = $this->db->fetchPageTranslations($code, $text);
+        $ncode = $this->_get['native_code'];
+        $tcode = $this->_get['translated_code'];
+        $ntext = $this->_get['native_text'];
+        $this->data = $this->db->fetchTranslationsByNativeTextAndTranslatedCode($ncode, $ntext, $tcode);
         $this->success = true;
     }
 
@@ -105,6 +107,21 @@ class OT_Ajax {
     {
         $this->data = OT::getConfigKey('available_locales', array());
         $this->success = true;
+    }
+    
+    public function ajax_entry_exists()
+    {
+        $native_code = $this->_post['native_code'];
+        $native_text = $this->_post['native_text'];
+        $translated_code = $this->_post['translated_code'];
+        $translated_text = $this->_post['translated_text'];
+        $entry = $this->db->fetchTranslationByMeta($native_code, $native_text, $translated_code, $translated_text);
+        if ($entry) {
+            $this->data['exists'] = true;
+        } else {
+            $this->data['exists'] = false;
+        }
+        $this->success;
     }
     
     public function ajax_create_translation_entry()

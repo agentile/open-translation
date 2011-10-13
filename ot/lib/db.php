@@ -941,38 +941,67 @@ class OT_DB
         return $this->fetchAll($sql);
     }
     
-    public function fetchPageTranslations($url, $native_code, $native_text)
+    public function fetchPageTranslations($url, $ncode, $ntext, $tcode)
     {
         $sql = "SELECT * 
                 FROM ot_translations
                 WHERE url = :url
                     AND native_locale_code = :ncode
-                    AND native_text = :ntext";
+                    AND native_text = :ntext
+                    AND translated_locale_code = :tcode";
         
         $data = array(
             'url' => $url,
-            'ncode' => $native_code,
-            'ntext' => $native_text,
+            'ncode' => $ncode,
+            'tcode' => $tcode,
+            'ntext' => $ntext,
         );
         return $this->fetchAll($sql, $data);
     }
     
-    public function fetchTranslationsByKey($native_code, $native_text)
+    public function fetchTranslationsByNativeTextAndTranslatedCode($ncode, $ntext, $tcode)
     {
         $sql = "SELECT * 
                 FROM ot_translations
                 WHERE native_locale_code = :ncode
-                    AND native_text = :ntext";
+                    AND native_text = :ntext
+                    AND translated_locale_code = :tcode";
         
         $data = array(
-            'ncode' => $native_code,
-            'ntext' => $native_text,
+            'ncode' => $ncode,
+            'tcode' => $tcode,
+            'ntext' => $ntext,
         );
         return $this->fetchAll($sql, $data);
     }
     
+    public function fetchTranslationByMeta($ncode, $ntext, $tcode, $ttext)
+    {
+        $sql = "SELECT * 
+            FROM ot_translations
+            WHERE native_locale_code = :ncode
+                AND native_text = :ntext
+                AND translated_locale_code = :tcode
+                AND translated_text = :ttext";
+        
+        $data = array(
+            'ncode' => $ncode,
+            'tcode' => $tcode,
+            'ntext' => $ntext,
+            'ttext' => $ttext,
+        );
+        return $this->fetchOne($sql, $data);
+    }
+    
     public function insertEntry($page, $native_code, $native_text, $translated_code, $translated_text, $ip)
     {
+        // does this entry already exist?
+        $entry = $this->fetchTranslationByMeta($native_code, $native_text, $translated_code, $translated_text);
+        
+        if ($entry) {
+            return false;
+        }
+        
         $data = array(
             'url' => $page,
             'native_locale_code' => $native_code,
@@ -1004,7 +1033,7 @@ class OT_DB
         
         $t = $this->fetchById($tid);
         
-        if (!$t || long2ip($t['ip']) == $ip) {
+        if (!$t || $t['ip'] == sprintf("%u", ip2long($ip))) {
             return false;
         }
         
@@ -1025,7 +1054,7 @@ class OT_DB
         
         $t = $this->fetchById($tid);
         
-        if (!$t || long2ip($t['ip']) == $ip) {
+        if (!$t || $t['ip'] == sprintf("%u", ip2long($ip))) {
             return false;
         }
         
