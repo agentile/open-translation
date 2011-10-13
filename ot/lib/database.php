@@ -14,9 +14,13 @@ class OT_DB {
             $dsn = $config['database']['type'] 
                 . ':dbname=' . $config['database']['name'] 
                 . ';host=' . $config['database']['host'];
-            $db = new PDO($dsn, $config['database']['user'], $config['database']['pass']);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            self::$db = $db;
+            try {
+                $db = new PDO($dsn, $config['database']['user'], $config['database']['pass']);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$db = $db;
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
         }
 
         return self::$db;

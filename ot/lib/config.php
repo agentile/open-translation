@@ -115,7 +115,6 @@ $config['translations'] = array(
         'es_VE' => 'Spanish (Venezuela)',
         'sv_SE' => 'Swedish (Sweden)',
         'th_TH' => 'Thai (Thailand)',
-        'th_TH_TH' => 'Thai (Thailand,TH)',
         'tr_TR' => 'Turkish (Turkey)',
         'uk_UA' => 'Ukrainian (Ukraine)',
         'vi_VN' => 'Vietnamese (Vietnam)',
