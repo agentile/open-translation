@@ -86,18 +86,20 @@ class OT_Ajax {
 
     public function ajax_fetch_page_translations()
     {
-        $page = $this->_get['page'];
-        $code = $this->_get['native_code'];
-        $text = $this->_get['selected'];
-        $this->data = $this->db->fetchPageTranslations($page, $code, $text);
+        $page = $this->_get['url'];
+        $ncode = $this->_get['native_code'];
+        $tcode = $this->_get['translated_code'];
+        $ntext = $this->_get['native_text'];
+        $this->data = $this->db->fetchPageTranslations($url, $ncode, $ntext, $tcode);
         $this->success = true;
     }
     
-    public function ajax_fetch_translations_by_key()
+    public function ajax_fetch_translations_by_native_text_and_translated_code()
     {
-        $code = $this->_get['native_code'];
-        $text = $this->_get['key'];
-        $this->data = $this->db->fetchPageTranslations($code, $text);
+        $ncode = $this->_get['native_code'];
+        $tcode = $this->_get['translated_code'];
+        $ntext = $this->_get['native_text'];
+        $this->data = $this->db->fetchTranslationsByNativeTextAndTranslatedCode($ncode, $ntext, $tcode);
         $this->success = true;
     }
 

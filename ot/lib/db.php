@@ -941,32 +941,36 @@ class OT_DB
         return $this->fetchAll($sql);
     }
     
-    public function fetchPageTranslations($url, $native_code, $native_text)
+    public function fetchPageTranslations($url, $ncode, $ntext, $tcode)
     {
         $sql = "SELECT * 
                 FROM ot_translations
                 WHERE url = :url
                     AND native_locale_code = :ncode
-                    AND native_text = :ntext";
+                    AND native_text = :ntext
+                    AND translated_locale_code = :tcode";
         
         $data = array(
             'url' => $url,
-            'ncode' => $native_code,
-            'ntext' => $native_text,
+            'ncode' => $ncode,
+            'tcode' => $tcode,
+            'ntext' => $ntext,
         );
         return $this->fetchAll($sql, $data);
     }
     
-    public function fetchTranslationsByKey($native_code, $native_text)
+    public function fetchTranslationsByNativeTextAndTranslatedCode($ncode, $ntext, $tcode)
     {
         $sql = "SELECT * 
                 FROM ot_translations
                 WHERE native_locale_code = :ncode
-                    AND native_text = :ntext";
+                    AND native_text = :ntext
+                    AND translated_locale_code = :tcode";
         
         $data = array(
-            'ncode' => $native_code,
-            'ntext' => $native_text,
+            'ncode' => $ncode,
+            'tcode' => $tcode,
+            'ntext' => $ntext,
         );
         return $this->fetchAll($sql, $data);
     }
