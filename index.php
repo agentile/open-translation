@@ -38,29 +38,29 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
 	<p data-translatable-id="example_text">Example using 'data-translatable-id' attribute class.</p>
 
 
-  <input type="text" class="ot-add-translation" />
-  <blockquote class="ot-translate-this">Translate this</blockquote>
-  <a href="#" class="ot-submit ot-pill">Submit</a>
-  
-  <ul class="ot-submitted-translations-list">
-    <li class="ot-list-green">
-      Some text
-      <span>+3</span>
-    </li>
-    
-    <li class="ot-list-green">
-      More text
-      <span>+2</span>
-    </li>
-    
-    <li class="ot-list-red">
-      Extra stuff
-      <span>-3</span>
-    </li>
-  </ul>
+  <!-- <input type="text" class="ot-add-translation" />
+   <blockquote class="ot-translate-this">Translate this</blockquote>
+   <a href="#" class="ot-submit ot-pill">Submit</a>
+   
+   <ul class="ot-submitted-translations-list">
+     <li class="ot-list-green">
+       Some text
+       <span>+3</span>
+     </li>
+     
+     <li class="ot-list-green">
+       More text
+       <span>+2</span>
+     </li>
+     
+     <li class="ot-list-red">
+       Extra stuff
+       <span>-3</span>
+     </li>
+   </ul>
 
-  <div class="ot-translateable ot-need-translation"></div>
-  <div class="ot-translateable ot-has-translation"></div>
+   <div class="ot-translateable ot-need-translation"></div>
+   <div class="ot-translateable ot-has-translation"></div> -->
 
 
 
