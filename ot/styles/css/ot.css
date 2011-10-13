@@ -1,6 +1,31 @@
 body.translatable [data-translatable-id] {
   background: #ccfa02;
 }
+body.translatable [data-translatable-id]:hover {
+  cursor: pointer;
+  background: #71fa02;
+}
+body.translatable #ot_translate {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #fff;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+  z-index: 800;
+  text-align: center;
+}
+body.translatable #ot_translate > .container {
+  width: 400px;
+  margin: 0 auto;
+}
+body.translatable #ot_translate ul.responses > li.positive {
+  background: #b1f89d;
+}
+body.translatable #ot_translate ul.responses > li.negative {
+  background: #f6aa9d;
+}
 body.translatable #ot_box {
   display: block;
   position: absolute;
@@ -28,7 +53,7 @@ body.translatable #ot_box > #ot_header > select {
   margin-left: 0.5em;
   font-size: 18px;
 }
-#ot_box {
+#ot_box, #ot_translate {
   display: none;
 }
 #ot_box p {

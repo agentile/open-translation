@@ -1,3 +1,6 @@
+// Variables
+@translatableBackground: #ccfa02;
+
 
 // Translate mode enabled when body contains this class.
 // Simple removing the class from the body tag (through javascript)
@@ -8,6 +11,37 @@ body.translatable {
   // is a translatable item.
 	[data-translatable-id] {
 		background: #ccfa02;
+		&:hover {
+		  cursor: pointer;
+		  background: spin(@translatableBackground, 22);
+		}
+	}
+	
+	#ot_translate {
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  background: #fff;
+	  opacity: 0.8;
+	  width: 100%;
+	  height: 100%;
+	  z-index: 800;
+	  text-align: center;
+	  
+	  > .container {
+	    width: 400px;
+	    margin: 0 auto;
+	  }
+	  
+	  ul.responses {
+	    > li.positive {
+	      background: #b1f89d;
+	    }
+	    > li.negative {
+	      background: #f6aa9d;
+	    }
+	  }
+	  
 	}
 
   #ot_box {
@@ -43,7 +77,7 @@ body.translatable {
   
 }
 
-#ot_box {
+#ot_box, #ot_translate {
   display: none;
 }
 
