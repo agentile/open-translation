@@ -7,5 +7,6 @@ CREATE TABLE ot_translations (
   translated_text text not null,
   ip integer not null,
   vote_down integer default 0,
-  vote_up integer default 0
+  vote_up integer default 0,
+  status smallint default 0
 );

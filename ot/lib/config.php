@@ -10,7 +10,7 @@ $config['database'] = array(
 );
 
 $config['native_locale'] = array(
-    'code' => 'es_MX',
+    'code' => 'en_US',
     'path' => '/locales',
 );
 

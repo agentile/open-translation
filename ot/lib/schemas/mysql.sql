@@ -8,5 +8,6 @@ CREATE TABLE ot_translations (
   ip INT NOT NULL,
   vote_down INT default 0,
   vote_up INT default 0,
+  status tinyint default 0,
   PRIMARY KEY (translation_id)
 ) ENGINE=INNODB DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
