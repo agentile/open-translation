@@ -5,7 +5,7 @@ CREATE TABLE ot_translations (
   native_text text not null,
   translated_locale_code text not null,
   translated_text text not null,
-  ip integer not null,
+  ip bigint not null,
   vote_down integer default 0,
   vote_up integer default 0,
   status smallint default 0
