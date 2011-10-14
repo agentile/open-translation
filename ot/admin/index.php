@@ -5,12 +5,6 @@ $db_config = OT::getConfigKey('database');
 $db = OT::getObject('OT_DB', $db_config); 
 $view = OT::getObject('OT_View');
 
-
-// Handle Manuel Entry
-if (isset($_POST['submit'])) {
-    $db->insertEntry($_POST['url'], $_POST['native_code'], $_POST['native_text'], $_POST['translated_code'], $_POST['translated_text'], OT::getIP());
-}
-
 $pages = $db->fetchPages();
 
 if (isset($_GET['native_code'])) { 

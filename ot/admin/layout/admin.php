@@ -9,7 +9,16 @@
 </head>
 <body>
 
-    <?php echo $view_content;?>
+    <div id="contain">
+      
+      <header id="admin-header">
+        <h1>Open Translation</h1>
+        <p class="admin-website-title"><?php echo $this->escape($this->host);?></p>
+      </header>
+      
+        <?php echo $view_content;?>
+    
+    </div>
 
 </body>
 </html>
