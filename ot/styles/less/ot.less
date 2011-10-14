@@ -215,7 +215,7 @@ body.translatable {
   li {
     display: block;
     width: auto;
-    overflow: auto;
+    overflow: visible;
     margin: 15px 0;
     font: 100 18px sans-serif;
     color: #27282d;
@@ -242,6 +242,21 @@ body.translatable {
     
     &:hover {
       cursor: pointer;
+    }
+    
+    & > span {
+      padding: 0 13px 0 10px;
+      font: 700 11px sans-serif;
+      position: absolute;
+      top: 13px;
+      right: -40px;
+      
+      &:after {
+       display: block;
+       position: absolute;
+       top: -1px;
+       left: 0; 
+      }
     }
   }
   
@@ -272,6 +287,15 @@ body.translatable {
          -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20); 
               box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20);
     }
+    
+    & > span {
+      color: green;
+      background: right center no-repeat transparent url(../list-green-check.png);
+      
+      &:after {
+        content: '+';
+      }
+    }
   }
   
   .ot-list-red {
@@ -299,6 +323,15 @@ body.translatable {
       -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20); 
          -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20); 
               box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20);
+    }
+    
+    & > span {
+      color: red;
+      background: right center no-repeat transparent url(../list-red-x.png);
+      
+      &:after {
+        content: '-';
+      }
     }
   }
   
