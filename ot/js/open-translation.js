@@ -60,7 +60,7 @@ var ot = {
         // console.log(data);
         var outputHTML = '';
           for (i in data.data) {
-            outputHTML += ('<li class="ot-list-green" data-tid="' + data.data[i]['translation_id'] + '">' + data.data[i]['translated_text'] + ' <span class="count">' + (parseInt(data.data[i]['vote_up']) - parseInt(data.data[i]['vote_down'])) + '</span></li>');
+            outputHTML += ('<li class="ot-list-green" data-tid="' + data.data[i]['translation_id'] + '"><span class="voteup">' + data.data[i]['translated_text'] + '</span> <span class="count">' + (parseInt(data.data[i]['vote_up']) - parseInt(data.data[i]['vote_down'])) + '</span><button class="votedown">&#8595;</button></li>');
           }
         return outputHTML;
       }
@@ -155,6 +155,24 @@ var ot = {
         }
       });
     },
+
+    clickVoteAgainst : function(li) {
+
+      var self = this,
+          li = $(li);
+
+      $.ajax({
+        url: (self.C.ajax_url),
+        type: 'POST',
+        data: {
+          'ajax_action':'vote_down',
+          'tid':$(li).attr('data-tid')
+        },
+        success: function(){
+          alert('thanks for voting');
+        }
+      });
+    },
     
     init : function($options) {
       
@@ -207,9 +225,14 @@ var ot = {
           $('#ot_translate').fadeOut();
       });
       
-      $('.ot-submitted-translations-list > li').live('click', function(e) {
+      $('.ot-submitted-translations-list > li > span.voteup').live('click', function(e) {
         e.preventDefault();
-        self.clickVoteFor(this);
+        self.clickVoteFor($(this).parent());
+      });
+
+      $('.ot-submitted-translations-list > li > button.votedown').live('click', function(e) {
+        e.preventDefault();
+        self.clickVoteAgainst($(this).parent());
       });
       
       function watchHash() {
