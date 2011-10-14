@@ -1011,7 +1011,8 @@ class OT_DB
                 FROM ot_translations
                 WHERE native_locale_code = :ncode
                     AND native_text = :ntext
-                    AND translated_locale_code = :tcode";
+                    AND translated_locale_code = :tcode
+                ORDER BY (vote_up - vote_down) DESC";
         
         $data = array(
             'ncode' => $ncode,
