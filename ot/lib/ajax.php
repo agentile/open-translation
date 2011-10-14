@@ -170,6 +170,15 @@ class OT_Ajax {
     {
         $this->success = $this->db->voteDownById($this->_post['tid'], OT::getIP());
     }
+    
+    /**
+     * Approve a translation
+     */
+    public function ajax_set_entry_status()
+    {
+        $this->db->setEntryStatus($this->_post['tid'], $this->_post['status']);
+        $this->success = true;
+    }
 }
 
 $ajax = new OT_Ajax();
