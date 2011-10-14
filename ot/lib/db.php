@@ -635,7 +635,7 @@ class OT_DB
             $alias = $this->_quoteName(substr($spec, $pos + 1));
             return "$orig $alias";
         }
-        
+
         // `table`.`column`
         $pos = strrpos($spec, '.');
         if ($pos) {
@@ -944,11 +944,43 @@ class OT_DB
     /**
      * Fetch all translations
      */
-    public function fetchAllTranslations()
+    public function fetchAllTranslations($url = null, $native_code = null, $translated_code = null)
     {
-        $sql = "SELECT * FROM ot_translations";
+        $where = '';
+        $data = array();
+        
+        if (!is_null($url)) {
+            $where = 'WHERE url = :url';
+            $data['url'] = $url;
+        }
+        
+        if (!is_null($native_code)) {
+            if ($where != '') {
+                $where .= ' AND native_locale_code = :ncode';
+            } else {
+                $where = 'WHERE native_locale_code = :ncode';
+            }
+            $data['ncode'] = $native_code;
+        }
+        if (!is_null($translated_code)) {
+            if ($where != '') {
+                $where .= ' AND translated_locale_code = :tcode';
+            } else {
+                $where = 'WHERE translated_locale_code = :tcode';
+            }
+            $data['tcode'] = $translated_code;
+        }
+        
+        $sql = "SELECT * FROM ot_translations $where";
+        return $this->fetchAll($sql, $data);
+    }
+    
+    public function fetchPages()
+    {
+        $sql = "SELECT url FROM ot_translations GROUP BY url";
         return $this->fetchAll($sql);
     }
+    
     /**
      * Fetch Translations by native code, native text and translated code by page
      */
@@ -1045,7 +1077,7 @@ class OT_DB
         $data = array(
             'tid' => $tid,
         );
-        return $this->fetch($sql, $data);
+        return $this->fetchOne($sql, $data);
     }
     
     /**
@@ -1089,6 +1121,24 @@ class OT_DB
         
         $data = array(
             'vote_down' => $t['vote_down'] + 1,
+        );
+        
+        $where = array('translation_id = ?' => array($tid));
+        
+        $this->update('ot_translations', $data, $where);
+    }
+    
+    /**
+     * set translation entry status
+     */
+    public function setEntryStatus($tid, $status)
+    {
+        if (!$this->isInt($tid) || !$this->isInt($status)) {
+            return false;
+        }
+        
+        $data = array(
+            'status' => $status,
         );
         
         $where = array('translation_id = ?' => array($tid));
