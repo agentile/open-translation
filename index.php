@@ -34,13 +34,13 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
   
   <div id="demo-contain">
     <header>
-      <h1>Open Translation</h1>
-      <h2>Crowd-sourced website translation</h2>
+      <h1><?php echo $locale->fetch('OPEN-TRANSLATION'); ?></h1>
+      <h2><?php echo $locale->fetch('TAGLINE'); ?></h2>
     </header>
 
-    <p>Open Translation is an open source plugin that will allow you as a web developer to easily source translations for text on your website.</p>
-    <p>Simply mark which passages of text on your site are able to be translated, and the plugin will handle the rest.</p>
-    <p>When you turn on edit mode, your translators will be able to see immediately which passages you're looking to have translated. Once they click on those elements, they'll be able to enter in a translation.</p>
+    <p><?php echo $locale->fetch('DEMO-PARA-1'); ?></p>
+    <p><?php echo $locale->fetch('DEMO-PARA-2'); ?></p>
+    <p><?php echo $locale->fetch('DEMO-PARA-3'); ?></p>
 
     <ul>
       <li data-translatable-id="click-here"><?php echo $locale->fetch('CLICK-HERE'); ?></li>
@@ -49,10 +49,10 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
       <li data-translatable-id="make-new-entry"><?php echo $locale->fetch('MAKE-NEW-ENTRY'); ?></li>
     </ul>
 
-    <p>The interesting part of this plugin however, is what happens after a translation has already been entered. When your translators click on a translateable element that has submitted translations, they'll be able to see what has been submitted.</p>
-    <p>From here, they'll be able to 'confirm' if a particular translation is correct or incorrect.</p>
-    <p>Our administration interface will show you the results for each translateable element, and you'll be able to judge which submitted translation is the most correct.</p>
-    <p>Add these translations to your locale files, and you're done.</p>
+    <p><?php echo $locale->fetch('DEMO-PARA-4'); ?></p>
+    <p><?php echo $locale->fetch('DEMO-PARA-5'); ?></p>
+    <p><?php echo $locale->fetch('DEMO-PARA-6'); ?></p>
+    <p><?php echo $locale->fetch('DEMO-PARA-7'); ?></p>
   </div><!-- .demo-contain -->
   
   
