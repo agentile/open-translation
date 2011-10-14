@@ -1077,7 +1077,7 @@ class OT_DB
         $data = array(
             'tid' => $tid,
         );
-        return $this->fetch($sql, $data);
+        return $this->fetchOne($sql, $data);
     }
     
     /**
