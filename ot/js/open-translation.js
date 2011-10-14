@@ -174,22 +174,10 @@ var ot = {
       }
       
       // Add the open-translation box to the body
-      $('body').append('<div id="ot_box"><div id="ot_spinner"></div><div id="ot_header"><a href="/#">&#215;</a> <span>Translating to:</span></div>');
+      $('body').append('<div id="ot_box"><div id="ot_header"><a href="/#">&#215;</a> <span>My language:</span></div>');
       $('body').append('<div id="ot_translate"></div>')
-      $('#ot_header').append('<select><option>Français</option><option>Español</option></select>')
-      var spinner_opts = {
-        lines: 10, // The number of lines to draw
-        length: 0, // The length of each line
-        width: 8, // The line thickness
-        radius: 0, // The radius of the inner circle
-        color: '#fff', // #rgb or #rrggbb
-        speed: 1.1, // Rounds per second
-        trail: 42, // Afterglow percentage
-        shadow: false // Whether to render a shadow
-      };
-      var spinner = new Spinner(spinner_opts).spin();
-      var target = document.getElementById('ot_spinner');
-      target.appendChild(spinner.el);
+      $('#ot_header').append('<select><option>Français</option><option>Español</option></select><span class="ot-indicate-change-language"></span>')
+
       
       // Get the available locales, yo!
       self.fetchAvailableLocales();
