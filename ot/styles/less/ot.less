@@ -14,6 +14,11 @@
 }
 
 @translatableBackground: #ccfa02;
+.ot-need-translation {
+  -webkit-box-shadow: inset 0 0 0 1px #978080, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #ff0000;
+     -moz-box-shadow: inset 0 0 0 1px #978080, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #ff0000;
+          box-shadow: inset 0 0 0 1px #978080, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #ff0000;
+}
 
 // Translate mode enabled when body contains this class.
 // Simple removing the class from the body tag (through javascript)
@@ -23,7 +28,7 @@ body.translatable {
 	// Any item with an attribute "data-translatable-id"
   // is a translatable item.
 	[data-translatable-id] {
-		background: #ccfa02;
+		.ot-need-translation;
 		&:hover {
 		  cursor: pointer;
 		  background: spin(@translatableBackground, 22);
@@ -34,7 +39,7 @@ body.translatable {
     display: block;
     position: absolute;
     top: 20px;
-    left: 20px;
+    right: 20px;
     border-radius: 50px;
     padding: 10px 20px 10px 30px;
     background: #0e0e11;
@@ -79,16 +84,22 @@ body.translatable {
 	    margin: 0 auto;
 	  }
 	  
-	  ul.responses {
-	    > li.positive {
-	      background: #b1f89d;
-	    }
-	    > li.negative {
-	      background: #f6aa9d;
-	    }
-	  }
-	  
 	}
+	
+	.ot-translateable {
+    width: 200px;
+    height: 150px;
+    margin: 30px 0;
+    .box-round(2px);
+
+
+  }
+
+  .ot-has-translation {
+    -webkit-box-shadow: inset 0 0 0 1px #899685, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #77a86a;
+       -moz-box-shadow: inset 0 0 0 1px #899685, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #77a86a;
+            box-shadow: inset 0 0 0 1px #899685, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #77a86a;
+  }
   
 }
 
@@ -194,8 +205,8 @@ body.translatable {
   
   li {
     display: block;
-    width: 130px;
-    height: 40px;
+    width: auto;
+    overflow: auto;
     margin: 15px 0;
     font: 100 18px sans-serif;
     color: #27282d;
@@ -281,25 +292,9 @@ body.translatable {
               box-shadow: 0 1px 0 rgba(0, 0, 0, 0.30), inset 0 0 12px rgba(0, 0, 0, 0.20);
     }
   }
+  
 }
 
-.ot-translateable {
-  width: 200px;
-  height: 150px;
-  margin: 30px 0;
-  .box-round(2px);
-  
-  &.ot-need-translation {
-    -webkit-box-shadow: inset 0 0 0 1px #978080, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #ff0000;
-       -moz-box-shadow: inset 0 0 0 1px #978080, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #ff0000;
-            box-shadow: inset 0 0 0 1px #978080, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #ff0000;
-  }
-  
-  &.ot-has-translation {
-    -webkit-box-shadow: inset 0 0 0 1px #899685, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #77a86a;
-       -moz-box-shadow: inset 0 0 0 1px #899685, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #77a86a;
-            box-shadow: inset 0 0 0 1px #899685, 0 0 0 1px rgba(255, 255, 255, 0.50), 0 0 0 2px #77a86a;
-  }
-}
+
 
 
