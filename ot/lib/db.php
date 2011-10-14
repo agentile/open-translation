@@ -1101,7 +1101,7 @@ class OT_DB
         
         $where = array('translation_id = ?' => array($tid));
         
-        $this->update('ot_translations', $data, $where);
+        return $this->update('ot_translations', $data, $where);
     }
     
     /**
@@ -1125,7 +1125,7 @@ class OT_DB
         
         $where = array('translation_id = ?' => array($tid));
         
-        $this->update('ot_translations', $data, $where);
+        return $this->update('ot_translations', $data, $where);
     }
     
     /**
@@ -1143,7 +1143,7 @@ class OT_DB
         
         $where = array('translation_id = ?' => array($tid));
         
-        $this->update('ot_translations', $data, $where);
+        return $this->update('ot_translations', $data, $where);
     }
     
     /**

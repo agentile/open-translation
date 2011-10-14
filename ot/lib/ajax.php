@@ -137,7 +137,7 @@ class OT_Ajax {
         } else {
             $this->data['exists'] = false;
         }
-        $this->success;
+        $this->success = true;
     }
     
     /**
