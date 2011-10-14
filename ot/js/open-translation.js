@@ -60,7 +60,7 @@ var ot = {
         // console.log(data);
         var outputHTML = '';
           for (i in data.data) {
-            outputHTML += ('<li class="ot-list-green">' + data.data[i]['translated_text'] + ' <span>' + (parseInt(data.data[i]['vote_up']) - parseInt(data.data[i]['vote_down'])) + '</span></li>');
+            outputHTML += ('<li class="ot-list-green" data-tid="' + data.data[i]['translation_id'] + '">' + data.data[i]['translated_text'] + ' <span class="count">' + (parseInt(data.data[i]['vote_up']) - parseInt(data.data[i]['vote_down'])) + '</span></li>');
           }
         return outputHTML;
       }
@@ -108,7 +108,7 @@ var ot = {
         type: 'POST',
         data: {
           'ajax_action':'create_translation_entry',
-          'page':'home',
+          'page':document.location.href,
           'native_code': self.options.native_locale,
           'native_text':native_text,
           'translated_code':translated_code,
@@ -136,6 +136,24 @@ var ot = {
       
       self.submitTranslation(native_text,translated_code,translated_text);
       
+    },
+    
+    clickVoteFor : function(li) {
+      
+      var self = this,
+          li = $(li);
+          
+      $.ajax({
+        url: (self.C.ajax_url),
+        type: 'POST',
+        data: {
+          'ajax_action':'vote_up',
+          'tid':$(li).attr('data-tid')
+        },
+        success: function(){
+          alert('thanks for voting');
+        }
+      });
     },
     
     init : function($options) {
@@ -199,6 +217,11 @@ var ot = {
       $('#ot_translate .close').live('click', function(e) {
           e.preventDefault();
           $('#ot_translate').fadeOut();
+      });
+      
+      $('.ot-submitted-translations-list > li').live('click', function(e) {
+        e.preventDefault();
+        self.clickVoteFor(this);
       });
       
       function watchHash() {
