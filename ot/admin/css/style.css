@@ -41,7 +41,7 @@ textarea{overflow:auto;vertical-align:top;resize:vertical;}
 input:invalid,textarea:invalid{background-color:#f0dddd;}
 #admin-header{width:100%;height:145px;background:#ededf0;border-bottom:1px solid #d8d8da;}#admin-header >h1{width:960px;height:33px;margin:0 auto;background:#1a1a1d;font:700 13px sans-serif;color:#c4e961;line-height:33px;text-indent:80px;}
 #admin-header .admin-website-title{width:960px;margin:0 auto;font:100 36px sans-serif;color:#1a1a1d;text-indent:80px;line-height:110px;}
-.admin-selectors{width:100%;}.admin-selectors .admin-page-selector-contain{float:left;width:640px;}
+.admin-selectors{width:100%;}.admin-selectors .admin-page-selector-contain{float:left;width:620px;}
 .admin-selectors .admin-language-selector-contain{float:left;}
 .admin-selectors label{display:inline-block;margin:28px 0;font:400 15px sans-serif;color:#5f0707;position:relative;}.admin-selectors label:after{content:'';display:inline-block;width:33px;height:33px;margin:0 0 0 -16px;position:absolute;top:-45px;left:50%;background:url(../images/admin-checkmark.png);}
 #admin-translations-table{width:960px;margin:0 auto;}#admin-translations-table hr{display:block;width:100%;height:4px;margin:0;background:#ededf0;border:0;outline:none;}
