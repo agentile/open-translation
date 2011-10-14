@@ -60,7 +60,8 @@ var ot = {
         // console.log(data);
         var outputHTML = '';
           for (i in data.data) {
-            outputHTML += ('<li class="ot-list-green" data-tid="' + data.data[i]['translation_id'] + '"><span class="voteup">' + data.data[i]['translated_text'] + '</span> <span class="count">' + (parseInt(data.data[i]['vote_up']) - parseInt(data.data[i]['vote_down'])) + '</span><button class="votedown">&#8595;</button></li>');
+            votes = (parseInt(data.data[i]['vote_up']) - parseInt(data.data[i]['vote_down']))
+            outputHTML += ('<li class="' + (votes < 0 ? 'ot-list-red' : 'ot-list-green') + '" data-tid="' + data.data[i]['translation_id'] + '"><span class="voteup">' + data.data[i]['translated_text'] + '</span> <span class="count">' + votes + '</span><button class="votedown">&#8595;</button></li>');
           }
         return outputHTML;
       }
@@ -152,6 +153,7 @@ var ot = {
         },
         success: function(){
           alert('thanks for voting');
+          $('#ot_translate .close').click();
         }
       });
     },
@@ -170,6 +172,7 @@ var ot = {
         },
         success: function(){
           alert('thanks for voting');
+          $('#ot_translate .close').click();
         }
       });
     },
