@@ -1,3 +1,107 @@
+<div id="contain">
+  
+  <header id="admin-header">
+    <h1>Open Translation</h1>
+    <p class="admin-website-title">Website title</p>
+  </header>
+  
+  <section id="admin-translations-table">
+    
+    <div class="admin-selectors clearfix">
+      
+      <div class="admin-page-selector-contain">
+        <label for="admin-page-selector">View translations on:</label>
+        <select id="admin-page-selector">
+          <option>Home page</option>
+          <option>About page</option>
+        </select>
+      </div>
+      
+      <div class="admin-language-selector-contain">
+        <label for="admin-language-selector">Language:</label>
+        <select id="admin-language-selector">
+          <option>French</option>
+          <option>Spanish</option>
+        </select>
+      </div>
+  
+    </div><!-- .admin-selectors -->
+    
+    <hr />
+    
+    <div class="admin-table-headers clearfix">
+      <h2 class="header-original">Text in English</h2>
+      <h2 class="header-translated">Text in French</h2>
+      <h2 class="header-status">Status</h2>
+    </div>
+    
+    <div class="admin-table-items">
+      <article class="admin-table-item unapproved clearfix">
+        <h3>Hello</h3>
+        <h3>Bonjour</h3>
+        
+        <div class="table-item-status">
+          <div class="item-badge badge-positive">5</div>
+          <div class="item-approve-button">Approve</div>
+          <div class="item-up-votes">
+            <span>10 votes:</span>
+            <span class="up-votes">Correct</span>
+          </div>
+          
+          <div class="item-down-votes">
+            <span>5 votes:</span>
+            <span class="down-votes">Incorrect</span>
+          </div>
+        </div>
+      </article>
+      
+      <article class="admin-table-item unapproved clearfix">
+        <h3>Hello</h3>
+        <h3>Bonjour</h3>
+        
+        <div class="table-item-status">
+          <div class="item-badge badge-negative">5</div>
+          <div class="item-approve-button">Approve</div>
+          <div class="item-up-votes">
+            <span>10 votes:</span>
+            <span class="up-votes">Correct</span>
+          </div>
+          
+          <div class="item-down-votes">
+            <span>5 votes:</span>
+            <span class="down-votes">Incorrect</span>
+          </div>
+        </div>
+      </article>
+      
+      <article class="admin-table-item approved clearfix">
+        <h3>Hello</h3>
+        <h3>Bonjour</h3>
+        
+        <div class="table-item-status">
+          <div class="item-badge badge-negative">5</div>
+          <div class="item-approve-button">Reset?</div>
+          <div class="item-up-votes">
+            <span>10 votes:</span>
+            <span class="up-votes">Correct</span>
+          </div>
+          
+          <div class="item-down-votes">
+            <span>5 votes:</span>
+            <span class="down-votes">Incorrect</span>
+          </div>
+        </div>
+      </article>
+    </div><!-- .admin-table-items -->
+    
+    
+    
+  </section>
+  
+</div>
+
+
+
 <h3>admin home</h3>
 
 <table>
