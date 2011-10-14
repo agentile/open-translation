@@ -1091,7 +1091,8 @@ class OT_DB
         
         $t = $this->fetchById($tid);
         
-        if (!$t || $t['ip'] == sprintf("%u", ip2long($ip))) {
+        //if (!$t || $t['ip'] == sprintf("%u", ip2long($ip))) {
+        if (!$t)) {
             return false;
         }
         
@@ -1115,7 +1116,8 @@ class OT_DB
         
         $t = $this->fetchById($tid);
         
-        if (!$t || $t['ip'] == sprintf("%u", ip2long($ip))) {
+        //if (!$t || $t['ip'] == sprintf("%u", ip2long($ip))) {
+        if (!$t)) {
             return false;
         }
         
