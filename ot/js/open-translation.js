@@ -25,25 +25,45 @@ var ot = {
     displayTranslateRequest : function(translatable_id,text) {
       
       var self = this,
-          responses;
+          responses = '';
       
       $.ajax({
-        url: (self.C.ajax_url + '?ajax_action=fetch_page_translations&key=' + translatable_id + '&locale=' + $('#ot_header select option:selected').val()),
+        url: (self.C.ajax_url + '?ajax_action=fetch_translations_by_native_text_and_translated_code&native_code=' + self.options.native_locale + '&translated_code=' + $('#ot_header select option:selected').val() + '&native_text=' + $('[data-translatable-id='+translatable_id+']').text()),
         type: 'GET',
-        
-      })
+        success: function(data) {
+          console.log(data);
+          if (data.success) {
+            responses = parseResponses(data);
+          }
+          else {
+            responses = '';
+          }
+          
+          t = $('#ot_translate');
+          t.html('');
+          t.append('<div class="container"></div>');
+          c = $(t.children('.container'));
+          c.append('<blockquote class="ot-translate-this">' + text + '</blockquote>');
+          console.log(responses);
+          responses.length > 0 ? c.append('<ul class="ot-submitted-translations-list">' + responses + '</ul>') : c.append('');
+          //c.append('<ul class="responses"><li class="positive">Response1</li><li class="positive">Response2</li><li class="negative">Response3</li></ul>');
+          c.append('<p><input type="text" class="ot-add-translation" /></p>')
+          c.append('<a href="#" class="ot-submit ot-pill">Submit</a>');
+          c.append('<p><a class="cancel close" href="javascript:;">Cancel</a></p>');
+          t.fadeIn();
+          
+          
+        }
+      });
       
-      t = $('#ot_translate');
-      t.html('');
-      t.append('<div class="container"></div>');
-      c = $(t.children('.container'));
-      c.append('<blockquote class="ot-translate-this">' + text + '</blockquote>');
-      c.append('<ul class="responses"><li class="positive">Response1</li><li class="positive">Response2</li><li class="negative">Response3</li></ul>');
-      c.append('<p><a class="showtextfield" href="javascript:;">Submit your own translation</a></p>');
-      c.append('<p><input type="text" class="ot-add-translation" /></p>')
-      c.append('<a href="#" class="ot-submit ot-pill">Submit</a>');
-      c.append('<p><a class="cancel close" href="javascript:;">Cancel</a></p>');
-      t.fadeIn();
+      function parseResponses(data) {
+        // console.log(data);
+        var outputHTML = '';
+          for (i in data.data) {
+            outputHTML += ('<li class="ot-list-green">' + data.data[i]['translated_text'] + ' <span>' + (parseInt(data.data[i]['vote_up']) - parseInt(data.data[i]['vote_down'])) + '</span></li>');
+          }
+        return outputHTML;
+      }
       
     },
     
@@ -67,7 +87,7 @@ var ot = {
       function getHTMLForReturnedLocales(data) {
         var outputHTML;
         for (var i in data.data) {
-          outputHTML += '<option value="' + i + '">' + data.data[i] + '</option>';
+          outputHTML += '<option value="' + i + '"' + (i == 'es_MX' ? ' SELECTED' : '') + '>' + data.data[i] + '</option>';
         }
         return outputHTML;
       }
@@ -78,17 +98,44 @@ var ot = {
       
       var self = this;
       
+      if (translated_text.length <= 0) {
+        alert('You did not enter any translated text.');
+        return;
+      }
+      
       $.ajax({
-        url: (self.C.ajax_url + '?ajax_action=create_translation_entry&page=home&native_code=&native_text=&translated_code=&translated_text='),
+        url: (self.C.ajax_url),
         type: 'POST',
         data: {
+          'ajax_action':'create_translation_entry',
           'page':'home',
           'native_code': self.options.native_locale,
           'native_text':native_text,
           'translated_code':translated_code,
           'translated_text':translated_text
+        },
+        success : function(data) {
+          console.log(data);
+          $('#ot_translate').fadeOut();
         }
-      })
+        
+      });
+      
+    },
+    
+    clickSubmitTranslation : function() {
+      
+      var self = this,
+          translated_text = '',
+          translated_code = '',
+          native_text = '';
+          
+      translated_text = $('#ot_translate .ot-add-translation').val();
+      translated_code = $('#ot_header select option:selected').val();
+      native_text = $('#ot_translate blockquote').text();
+      
+      self.submitTranslation(native_text,translated_code,translated_text);
+      
     },
     
     init : function($options) {
@@ -124,7 +171,10 @@ var ot = {
       };
       var spinner = new Spinner(spinner_opts).spin();
       var target = document.getElementById('ot_spinner');
-      target.appendChild(spinner.el)
+      target.appendChild(spinner.el);
+      
+      // Get the available locales, yo!
+      self.fetchAvailableLocales();
 
       $(document).mouseup(function() {
           selected = getSelectedText();
@@ -141,9 +191,9 @@ var ot = {
           self.displayTranslateRequest($(this).attr(self.C.translatable_attribute),$(this).text());
       });
 
-      $('#ot_confirm').live('click', function(e) {
+      $('#ot_translate .ot-submit').live('click', function(e) {
           e.preventDefault();
-          selectLocale();
+          self.clickSubmitTranslation();
       });
 
       $('#ot_translate .close').live('click', function(e) {
