@@ -31,6 +31,7 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
 <body>
   
   <a href="/#translate">Turn On Translation</a>
+  
   <div id="demo-contain">
     <header>
       <h1>Open Translation</h1>
