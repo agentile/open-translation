@@ -53,6 +53,10 @@ $locale = new OT_Locale(array('code' => $locale_code, 'path' => dirname(__FILE__
     <p><?php echo $locale->fetch('DEMO-PARA-5'); ?></p>
     <p><?php echo $locale->fetch('DEMO-PARA-6'); ?></p>
     <p><?php echo $locale->fetch('DEMO-PARA-7'); ?></p>
+    
+    <a href="/ot/admin/index.php">Administration</a>
+    <a href="https://github.com/agentile/open-translation">GitHub Repo</a>
+
   </div><!-- .demo-contain -->
   
   
